@@ -8,11 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.GsonBuilder;
 import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.iface.APIService;
+import com.jmp.dailymlb.presenter.MainContract;
+import com.jmp.dailymlb.presenter.MainPresenter;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -20,8 +23,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View{
 
+    private MainPresenter presenter;
+    final String KEY = "4bebbc0605674b6c95b071224bca6339";
+    final String BASE_URL = "https://api.sportsdata.io/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,22 +35,19 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.navi_view);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        GamesByDateFragment dateFragment = new GamesByDateFragment();
-        FragmentTransaction transaction= fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment, dateFragment).commit();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.sportsdata.io/v3/mlb/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        APIService apiService = retrofit.create(APIService.class);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2019);
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.DAY_OF_MONTH, 31);
+        presenter = new MainPresenter();
+        presenter.attachView(this);
+        presenter.addFragment(fragmentManager);
+        presenter.connectAPIService(BASE_URL);
+        presenter.getGamesByDate(KEY);
 
 
 
+
+    }
+
+    @Override
+    public void showToast(String title) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
 }
