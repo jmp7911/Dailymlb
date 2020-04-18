@@ -13,6 +13,11 @@ public interface MainContract {
         void detachView();
         void addFragment(FragmentManager fragmentManager);
         void connectAPIService(String baseUrl);
-        String getGamesByDate(String key);
+        void requestGamesByDate(String key);
+        void requestPlaysByPlay(int gameId, String key);
+        void requestStadiums(String key);
+        void requestTeams(String key);
+        void requestTeamStats(int season, String key);
+        void requestPlayerStats(int season, String key);
     }
 }
