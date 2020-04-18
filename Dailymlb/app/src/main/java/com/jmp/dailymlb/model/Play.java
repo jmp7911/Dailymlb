@@ -3,36 +3,31 @@ package com.jmp.dailymlb.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Play {
-    int gameId;
-    int season;
+    @SerializedName("PlayID")
     long playId;
+    @SerializedName("InningNumber")
     int inningNumber;
+    @SerializedName("Result")
     String result;
-    boolean strikeOut;
+    @SerializedName("Strikeout")
+    boolean strikeout;
+    @SerializedName("Walk")
     boolean walk;
+    @SerializedName("Hit")
     boolean hit;
+    @SerializedName("PitcherTeamID")
     int pitcherTeamId;
+    @SerializedName("HitterTeamID")
     int hitterTeamId;
+    @SerializedName("PitcherID")
     int pitcherId;
+    @SerializedName("HitterID")
     int hitterId;
+    @SerializedName("PitcherName")
     String pitcherName;
+    @SerializedName("HitterName")
     String hitterName;
 
-    public int getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
-
-    public int getSeason() {
-        return season;
-    }
-
-    public void setSeason(int season) {
-        this.season = season;
-    }
 
     public long getPlayId() {
         return playId;
@@ -58,12 +53,12 @@ public class Play {
         this.result = result;
     }
 
-    public boolean isStrikeOut() {
-        return strikeOut;
+    public boolean isStrikeout() {
+        return strikeout;
     }
 
-    public void setStrikeOut(boolean strikeOut) {
-        this.strikeOut = strikeOut;
+    public void setStrikeout(boolean strikeOut) {
+        this.strikeout = strikeOut;
     }
 
     public boolean isWalk() {

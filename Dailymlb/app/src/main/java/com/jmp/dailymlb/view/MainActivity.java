@@ -39,11 +39,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         presenter.attachView(this);
         presenter.addFragment(fragmentManager);
         presenter.connectAPIService(BASE_URL);
-        presenter.getGamesByDate(KEY);
-
-
-
-
+        presenter.requestGamesByDate(KEY);
+        presenter.requestPlaysByPlay(2019, KEY);
+        presenter.requestStadiums(KEY);
+        presenter.requestTeams(KEY);
+        presenter.requestPlayerStats(2019, KEY);
+        presenter.requestTeamStats(2019, KEY);
     }
 
     @Override

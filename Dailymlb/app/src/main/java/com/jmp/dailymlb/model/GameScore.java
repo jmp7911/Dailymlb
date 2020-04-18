@@ -11,12 +11,20 @@ public class GameScore {
     String dateTime;
     @SerializedName("Status")
     String status;
+    @SerializedName("Season")
+    int season;
+    @SerializedName("SeasonType")
+    int seasonType;
+    @SerializedName("StadiumID")
+    int stadiumId;
     @SerializedName("HomeTeamID")
     int homeTeamId;
     @SerializedName("AwayTeamID")
     int awayTeamId;
     @SerializedName("Innings")
     ArrayList<Inning> innings;
+    @SerializedName("Inning")
+    int inning;
     @SerializedName("HomeTeam")
     String homeTeam;
     @SerializedName("AwayTeam")
@@ -29,7 +37,7 @@ public class GameScore {
     int awayTeamRuns;
     @SerializedName("HomeTeamRuns")
     int homeTeamRuns;
-    @SerializedName("AwayTeamErros")
+    @SerializedName("AwayTeamErrors")
     int awayTeamErrors;
     @SerializedName("HomeTeamErrors")
     int homeTeamErrors;
@@ -46,6 +54,46 @@ public class GameScore {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public int getSeason() {
+        return season;
+    }
+
+    public void setSeason(int season) {
+        this.season = season;
+    }
+
+    public int getSeasonType() {
+        return seasonType;
+    }
+
+    public void setSeasonType(int seasonType) {
+        this.seasonType = seasonType;
+    }
+
+    public int getStadiumId() {
+        return stadiumId;
+    }
+
+    public void setStadiumId(int stadiumId) {
+        this.stadiumId = stadiumId;
+    }
+
+    public int getInning() {
+        return inning;
+    }
+
+    public void setInning(int inning) {
+        this.inning = inning;
     }
 
     public void setHomeTeamId(int homeTeamId) {
