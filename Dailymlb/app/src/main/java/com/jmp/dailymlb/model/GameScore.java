@@ -1,24 +1,43 @@
 package com.jmp.dailymlb.model;
 
-import java.util.Map;
+import com.google.gson.annotations.SerializedName;
 
-public class Score {
+import java.util.ArrayList;
+
+public class GameScore {
+    @SerializedName("GameID")
     int gameId;
+    @SerializedName("DateTime")
+    String dateTime;
+    @SerializedName("Status")
     String status;
-    int homeId;
-    int awayId;
-    Map<Integer, Integer> awayTeamInnings;
-    Map<Integer, Integer> homeTeamInnings;
+    @SerializedName("HomeTeamID")
+    int homeTeamId;
+    @SerializedName("AwayTeamID")
+    int awayTeamId;
+    @SerializedName("Innings")
+    ArrayList<Inning> innings;
+    @SerializedName("HomeTeam")
     String homeTeam;
+    @SerializedName("AwayTeam")
     String awayTeam;
+    @SerializedName("AwayTeamHits")
     int awayTeamHits;
+    @SerializedName("HomeTeamHits")
     int homeTeamHits;
+    @SerializedName("AwayTeamRuns")
     int awayTeamRuns;
+    @SerializedName("HomeTeamRuns")
     int homeTeamRuns;
+    @SerializedName("AwayTeamErros")
     int awayTeamErrors;
+    @SerializedName("HomeTeamErrors")
     int homeTeamErrors;
+    @SerializedName("WinningPitcherID")
     int winningPitcherId;
+    @SerializedName("LosingPitcherID")
     int losingPitcherId;
+    @SerializedName("SavingPitcherID")
     int savingPitcherId;
 
     public void setGameId(int gameId) {
@@ -29,20 +48,12 @@ public class Score {
         this.status = status;
     }
 
-    public void setHomeId(int homeId) {
-        this.homeId = homeId;
+    public void setHomeTeamId(int homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public void setAwayId(int awayId) {
-        this.awayId = awayId;
-    }
-
-    public void setAwayTeamInnings(Map<Integer, Integer> awayTeamInnings) {
-        this.awayTeamInnings = awayTeamInnings;
-    }
-
-    public void setHomeTeamInnings(Map<Integer, Integer> homeTeamInnings) {
-        this.homeTeamInnings = homeTeamInnings;
+    public void setAwayTeamId(int awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 
     public void setHomeTeam(String homeTeam) {
@@ -97,20 +108,20 @@ public class Score {
         return status;
     }
 
-    public int getHomeId() {
-        return homeId;
+    public int getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public int getAwayId() {
-        return awayId;
+    public int getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public Map<Integer, Integer> getAwayTeamInnings() {
-        return awayTeamInnings;
+    public ArrayList<Inning> getInnings() {
+        return innings;
     }
 
-    public Map<Integer, Integer> getHomeTeamInnings() {
-        return homeTeamInnings;
+    public void setInnings(ArrayList<Inning> innings) {
+        this.innings = innings;
     }
 
     public String getHomeTeam() {

@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    @Override
     public void showToast(String title) {
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }

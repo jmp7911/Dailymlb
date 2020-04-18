@@ -1,23 +1,19 @@
 package com.jmp.dailymlb.presenter;
 
-import android.view.SurfaceControl;
-import android.view.View;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.iface.APIService;
-import com.jmp.dailymlb.model.Score;
+import com.jmp.dailymlb.model.GameScore;
 import com.jmp.dailymlb.view.GamesByDateFragment;
-
-import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,16 +61,17 @@ public class MainPresenter implements MainContract.Presenter {
         calendar.set(Calendar.MONTH, 6);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
 
-        Call<ResponseBody> gamesByDate = apiService.gamesByDate(sdf.format(calendar.getTime()), key);
-        gamesByDate.enqueue(new Callback<ResponseBody>() {
+        Call<List<GameScore>> gamesByDate = apiService.gamesByDate(sdf.format(calendar.getTime()), key);
+        gamesByDate.enqueue(new Callback<List<GameScore>>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                System.out.println(response.raw());
+            public void onResponse(Call<List<GameScore>> call, Response<List<GameScore>> response) {
+                Gson gson = new GsonBuilder().create();
+                System.out.println(gson.toJson(response.body().get(0)));
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onFailure(Call<List<GameScore>> call, Throwable t) {
+                t.printStackTrace();
             }
         });
         return null;
