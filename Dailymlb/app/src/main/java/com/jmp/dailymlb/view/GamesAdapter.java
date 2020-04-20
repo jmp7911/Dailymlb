@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 
 import com.jmp.dailymlb.R;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
