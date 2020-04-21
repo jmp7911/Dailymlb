@@ -45,7 +45,9 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         view.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClickListener.onItemClick(position);
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
             }
         });
     }
@@ -57,7 +59,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
 
 
     @Override
-    public void notifyAdapter() {
+    public void notifyItem() {
         notifyDataSetChanged();
     }
 
@@ -71,4 +73,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
+
 }
