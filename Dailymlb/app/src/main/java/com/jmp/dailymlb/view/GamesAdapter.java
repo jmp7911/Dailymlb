@@ -5,12 +5,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.model.Score;
+import com.jmp.dailymlb.presenter.GamesAdapterContract;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> {
+public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> implements GamesAdapterContract.Model, GamesAdapterContract.View {
+    private List<Score> games;
 
+    public GamesAdapter() {
+        this.games = new ArrayList<>();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {
@@ -33,6 +42,17 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 5;
+        return games.size();
+    }
+
+    @Override
+    public void notifyItem() {
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void addItem() {
+        Score score = new Score();
+        games.add(score);
     }
 }
