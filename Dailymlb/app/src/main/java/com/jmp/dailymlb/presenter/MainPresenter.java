@@ -13,17 +13,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainPresenter implements MainContract.Presenter {
-    private MainContract.View view;
-
+    private MainContract.View mainView;
     @Override
     public void attachView(MainContract.View view) {
-        this.view = view;
+        this.mainView = view;
     }
 
     @Override
     public void detachView() {
-        view = null;
+        mainView = null;
     }
+
+
 
     @Override
     public String getGamesByDate(String key) {

@@ -3,14 +3,14 @@
     <item
         android:id="@+id/daily_game"
         android:icon="@color/cardview_dark_background"
-        android:title="@string/app_name"/>
+        android:title="@string/games_by_date"/>
     <item
         android:id="@+id/team_rank"
         android:icon="@color/cardview_light_background"
-        android:title="@string/app_name"/>
+        android:title="@string/team_stats"/>
     <item
         android:id="@+id/player_rank"
         android:icon="@color/cardview_light_background"
-        android:title="@string/app_name"/>
+        android:title="@string/player_stats"/>
 
 </menu>
