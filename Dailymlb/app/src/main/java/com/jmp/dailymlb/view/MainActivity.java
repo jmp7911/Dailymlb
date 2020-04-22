@@ -9,12 +9,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.model.Score;
+import com.jmp.dailymlb.model.source.gameScore.GameScoreRepository;
 import com.jmp.dailymlb.presenter.MainContract;
 import com.jmp.dailymlb.presenter.MainPresenter;
 
-import java.util.List;
-
+import static com.jmp.dailymlb.model.Constants.BASE_URL;
 import static com.jmp.dailymlb.model.Constants.KEY;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View{
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter = new MainPresenter();
         presenter.attachView(this);
-        presenter.getGamesByDate(KEY);
+
 
 
     }

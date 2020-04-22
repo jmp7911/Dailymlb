@@ -1,5 +1,7 @@
 package com.jmp.dailymlb.presenter;
 
+import com.jmp.dailymlb.model.source.gameScore.GameScoreRepository;
+
 public interface GamesContract {
     interface View {
         void showToast(String title);
@@ -7,8 +9,10 @@ public interface GamesContract {
     interface Presenter {
         void attachView(View view);
         void detachView();
-        void addItem();
         void setGamesAdapterModel(GamesAdapterContract.Model gamesAdapterModel);
         void setGamesAdapterView(GamesAdapterContract.View gamesAdapterView);
+        void setGameScoreData(GameScoreRepository gameScoreData);
+        void loadGamesByDate();
+
     }
 }

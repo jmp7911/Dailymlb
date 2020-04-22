@@ -1,5 +1,8 @@
 package com.jmp.dailymlb.presenter;
 
+import com.jmp.dailymlb.model.source.gameScore.GameScoreRepository;
+
+import androidx.fragment.app.FragmentManager;
 
 public interface MainContract {
     public interface View {
@@ -9,6 +12,7 @@ public interface MainContract {
     public interface Presenter {
         void attachView(View view);
         void detachView();
-        String getGamesByDate(String key);
+
+
     }
 }
