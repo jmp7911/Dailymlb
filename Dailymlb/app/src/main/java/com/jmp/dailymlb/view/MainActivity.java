@@ -3,25 +3,19 @@ package com.jmp.dailymlb.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.GsonBuilder;
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.iface.APIService;
+import com.jmp.dailymlb.presenter.MainContract;
+import com.jmp.dailymlb.presenter.MainPresenter;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import static com.jmp.dailymlb.model.Constants.KEY;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements MainContract.View{
+    private MainPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,21 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         GamesByDateFragment dateFragment = new GamesByDateFragment();
-        FragmentTransaction transaction= fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment, dateFragment).commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragment_layout, dateFragment).commit();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.sportsdata.io/v3/mlb/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        APIService apiService = retrofit.create(APIService.class);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2019);
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.DAY_OF_MONTH, 31);
+        presenter = new MainPresenter();
+        presenter.attachView(this);
+        presenter.getGamesByDate(KEY);
 
 
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    @Override
+    public void showToast(String title) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
 }
