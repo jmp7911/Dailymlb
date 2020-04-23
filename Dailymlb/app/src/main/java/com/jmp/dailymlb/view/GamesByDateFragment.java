@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.model.GameScore;
 import com.jmp.dailymlb.model.source.gameScore.GameScoreRepository;
 import com.jmp.dailymlb.presenter.GamesContract;
 import com.jmp.dailymlb.presenter.GamesPresenter;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +36,14 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
     public void onAttach(Context cxt) {
         super.onAttach(cxt);
         context = cxt;
+
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        gamesPresenter.detachView();
+    }
 
     @Nullable
     @Override
@@ -44,9 +53,7 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-
         gamesAdapter = new GamesAdapter();
-
         recyclerView.setAdapter(gamesAdapter);
         return view;
 
@@ -57,11 +64,10 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         super.onActivityCreated(savedInstanceState);
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
-        gamesPresenter.setGamesAdapterView(gamesAdapter);
-        gamesPresenter.setGamesAdapterModel(gamesAdapter);
 
         gamesPresenter.setGameScoreData(GameScoreRepository.getInstance());
         gamesPresenter.loadGamesByDate();
+
     }
 
     @Override
@@ -69,5 +75,10 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void setGameScore(List<GameScore> games) {
+        gamesAdapter.setGames(games);
+        gamesAdapter.notifyDataSetChanged();
+    }
 
 }

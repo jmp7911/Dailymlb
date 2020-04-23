@@ -15,4 +15,24 @@ public class Inning {
     int awayTeamRuns;
     @SerializedName("HomeTeamRuns")
     int homeTeamRuns;
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public int getInningId() {
+        return inningId;
+    }
+
+    public int getInningNumber() {
+        return inningNumber;
+    }
+
+    public int getAwayTeamRuns() {
+        return awayTeamRuns;
+    }
+
+    public int getHomeTeamRuns() {
+        return homeTeamRuns;
+    }
 }

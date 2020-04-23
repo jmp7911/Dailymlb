@@ -9,9 +9,6 @@ import java.util.List;
 public class GamesPresenter implements GamesContract.Presenter {
     private GamesContract.View view ;
 
-    private GamesAdapterContract.Model gamesAdapterModel;
-    private GamesAdapterContract.View gamesAdapterView;
-
     private GameScoreRepository gameScoreData;
 
     @Override
@@ -24,15 +21,6 @@ public class GamesPresenter implements GamesContract.Presenter {
         view = null;
     }
 
-    @Override
-    public void setGamesAdapterModel(GamesAdapterContract.Model gamesAdapterModel) {
-        this.gamesAdapterModel = gamesAdapterModel;
-    }
-
-    @Override
-    public void setGamesAdapterView(GamesAdapterContract.View gamesAdapterView) {
-        this.gamesAdapterView = gamesAdapterView;
-    }
 
     @Override
     public void setGameScoreData(GameScoreRepository gameScoreData) {
@@ -44,8 +32,7 @@ public class GamesPresenter implements GamesContract.Presenter {
         gameScoreData.getGames(new GameScoreSource.LoadGameCallback() {
             @Override
             public void onLoadGameCallback(List<GameScore> games) {
-                gamesAdapterModel.addItem(games);
-                gamesAdapterView.notifyItem();
+                view.setGameScore(games);
             }
         });
     }

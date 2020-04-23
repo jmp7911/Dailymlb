@@ -18,8 +18,17 @@ import retrofit2.Response;
 import static com.jmp.dailymlb.model.Constants.KEY;
 
 public class GameScoreRemoteDataSource implements GameScoreSource {
+    private static GameScoreRemoteDataSource gameScoreRemoteDataSource = null;
+    private GameScoreRemoteDataSource() {
 
+    }
 
+    public static GameScoreRemoteDataSource getInstance() {
+        if (gameScoreRemoteDataSource == null) {
+            gameScoreRemoteDataSource = new GameScoreRemoteDataSource();
+        }
+        return gameScoreRemoteDataSource;
+    }
     @Override
     public void getGames(final LoadGameCallback loadGameCallback) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);

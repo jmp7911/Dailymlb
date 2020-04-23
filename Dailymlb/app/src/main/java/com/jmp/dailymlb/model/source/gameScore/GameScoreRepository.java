@@ -8,8 +8,9 @@ import java.util.List;
 public class GameScoreRepository implements GameScoreSource {
     private static GameScoreRepository gameScoreRepository = null;
     private GameScoreRemoteDataSource gameScoreRemoteDataSource;
+
     private GameScoreRepository() {
-        gameScoreRemoteDataSource = new GameScoreRemoteDataSource();
+        gameScoreRemoteDataSource = GameScoreRemoteDataSource.getInstance();
     }
 
     public static GameScoreRepository getInstance() {

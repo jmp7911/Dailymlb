@@ -53,58 +53,6 @@ public class GameScore {
     @SerializedName("SavingPitcherID")
     int savingPitcherId;
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public void setAwayTeamHits(int awayTeamHits) {
-        this.awayTeamHits = awayTeamHits;
-    }
-
-    public void setHomeTeamHits(int homeTeamHits) {
-        this.homeTeamHits = homeTeamHits;
-    }
-
-    public void setAwayTeamRuns(int awayTeamRuns) {
-        this.awayTeamRuns = awayTeamRuns;
-    }
-
-    public void setHomeTeamRuns(int homeTeamRuns) {
-        this.homeTeamRuns = homeTeamRuns;
-    }
-
-    public void setAwayTeamErrors(int awayTeamErrors) {
-        this.awayTeamErrors = awayTeamErrors;
-    }
-
-    public void setHomeTeamErrors(int homeTeamErrors) {
-        this.homeTeamErrors = homeTeamErrors;
-    }
-
-    public void setWinningPitcherId(int winningPitcherId) {
-        this.winningPitcherId = winningPitcherId;
-    }
-
-    public void setLosingPitcherId(int losingPitcherId) {
-        this.losingPitcherId = losingPitcherId;
-    }
-
-    public void setSavingPitcherId(int savingPitcherId) {
-        this.savingPitcherId = savingPitcherId;
-    }
-
     public int getGameId() {
         return gameId;
     }
