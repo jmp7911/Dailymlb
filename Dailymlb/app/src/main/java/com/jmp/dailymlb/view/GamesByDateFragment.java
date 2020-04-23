@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.model.GameScore;
-import com.jmp.dailymlb.model.source.gameScore.GameScoreRepository;
 import com.jmp.dailymlb.presenter.GamesContract;
 import com.jmp.dailymlb.presenter.GamesPresenter;
 
@@ -21,8 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static com.jmp.dailymlb.model.Constants.KEY;
 
 public class GamesByDateFragment extends Fragment implements GamesContract.View {
     View view;
@@ -65,7 +61,6 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
 
-        gamesPresenter.setGameScoreData(GameScoreRepository.getInstance());
         gamesPresenter.loadGamesByDate();
 
     }

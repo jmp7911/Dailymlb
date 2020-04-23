@@ -2,8 +2,6 @@ package com.jmp.dailymlb.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import retrofit2.http.Query;
-
 public class Inning {
     @SerializedName("GameID")
     int gameId;
