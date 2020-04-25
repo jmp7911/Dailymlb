@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.model.GameScore;
+import com.jmp.dailymlb.model.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> {
-    private List<GameScore> games;
+    private List<Game> games;
 
     public GamesAdapter() {
         this.games = new ArrayList<>();
@@ -44,11 +44,11 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         return games.size();
     }
 
-    public void setGames(List<GameScore> games) {
+    public void setGames(List<Game> games) {
         this.games = games;
     }
 
-    public List<GameScore> getGames() {
+    public List<Game> getGames() {
         return games;
     }
 }

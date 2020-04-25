@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class GameScore {
+public class Game {
     @SerializedName("GameID")
     int gameId;
     @SerializedName("DateTime")
