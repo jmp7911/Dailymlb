@@ -12,10 +12,7 @@ import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.presenter.GamesContract;
 import com.jmp.dailymlb.presenter.GamesPresenter;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,9 +60,7 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         super.onActivityCreated(savedInstanceState);
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
-
-        gamesPresenter.loadGamesByDate("2019-JUL-31");
+        gamesPresenter.getGamesByDate(2019, 7, 31);
 
     }
 

@@ -11,7 +11,7 @@ public interface GamesContract {
     interface Presenter {
         void attachView(View view);
         void detachView();
-        void loadGamesByDate(String date);
+        void getGamesByDate(int year, int month, int day);
 
     }
 }

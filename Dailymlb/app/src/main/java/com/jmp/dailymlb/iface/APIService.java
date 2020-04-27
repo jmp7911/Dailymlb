@@ -12,6 +12,6 @@ import retrofit2.http.Query;
 
 public interface APIService {
     @GET("/v3/mlb/scores/json/GamesByDate/{date}")
-    Call<List<Game>> gamesByDate(@Path("date") String date, @Query("key") String key);
+    Call<List<Game>> getGamesByDate(@Path("date") String date, @Query("key") String key);
 
 }
