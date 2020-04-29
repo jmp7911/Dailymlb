@@ -12,10 +12,10 @@ import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.presenter.MainContract;
 import com.jmp.dailymlb.presenter.MainPresenter;
 
-import static com.jmp.dailymlb.model.Constants.KEY;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View{
     private MainPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter = new MainPresenter();
         presenter.attachView(this);
-        presenter.getGamesByDate(KEY);
-
-
-
 
     }
 

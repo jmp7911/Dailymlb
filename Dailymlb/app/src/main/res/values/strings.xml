@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Dailymlb</string>
+    <string name="games_by_date">오늘의경기</string>
+    <string name="player_stats">개인 순위</string>
+    <string name="team_stats">팀 순위</string>
 </resources>
