@@ -1,14 +1,9 @@
 package com.jmp.dailymlb.iface;
 
 
-import com.google.gson.annotations.SerializedName;
-import com.jmp.dailymlb.model.GameScore;
-import com.jmp.dailymlb.model.Play;
-import com.jmp.dailymlb.model.PlayByPlay;
-import com.jmp.dailymlb.model.PlayerStat;
+
 import com.jmp.dailymlb.model.Stadium;
-import com.jmp.dailymlb.model.Team;
-import com.jmp.dailymlb.model.TeamStat;
+import com.jmp.dailymlb.model.Game;
 
 import java.util.List;
 
@@ -19,15 +14,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
     @GET("/v3/mlb/scores/json/GamesByDate/{date}")
-    Call<List<GameScore>> getGamesByDate(@Path("date") String date, @Query("key") String key);
-    @GET("/v3/mlb/pbp/json/PlayByPlay/{GameID}")
-    Call<PlayByPlay> getPlaysByPlay(@Path("GameID") int gameId, @Query("key") String key);
+    Call<List<Game>> getGamesByDate(@Path("date") String date, @Query("key") String key);
     @GET("/v3/mlb/scores/json/Stadiums")
     Call<List<Stadium>> getStadiums(@Query("key") String key);
-    @GET("/v3/mlb/scores/json/teams")
-    Call<List<Team>> getTeams(@Query("key") String key);
-    @GET("/v3/mlb/scores/json/TeamSeasonStats/{season}")
-    Call<List<TeamStat>> getTeamStats(@Path("season") int season, @Query("key") String key);
-    @GET("/v3/mlb/stats/json/PlayerSeasonStats/{season}")
-    Call<List<PlayerStat>> getPlayerStats(@Path("season") int season, @Query("key") String key);
 }
