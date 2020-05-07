@@ -2,6 +2,7 @@ package com.jmp.dailymlb.presenter;
 
 import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Retrofit2Client;
+import com.jmp.dailymlb.model.Stadium;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,6 +48,25 @@ public class GamesPresenter implements GamesContract.Presenter {
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
+                view.showToast(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getStadium() {
+        Call<List<Stadium>> stadiums = Retrofit2Client.getInstance().getApiService()
+                .getStadiums(KEY);
+        stadiums.enqueue(new Callback<List<Stadium>>() {
+            @Override
+            public void onResponse(Call<List<Stadium>> call, Response<List<Stadium>> response) {
+                if (response.code() == 200) {
+                    view.setStadiums(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Stadium>> call, Throwable t) {
                 view.showToast(t.getMessage());
             }
         });

@@ -61,6 +61,38 @@ public class Game {
         return status;
     }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public int getSeason() {
+        return season;
+    }
+
+    public int getSeasonType() {
+        return seasonType;
+    }
+
+    public int getStadiumId() {
+        return stadiumId;
+    }
+
+    public int getHomeTeamId() {
+        return homeTeamId;
+    }
+
+    public int getAwayTeamId() {
+        return awayTeamId;
+    }
+
+    public ArrayList<Inning> getInnings() {
+        return innings;
+    }
+
+    public int getInning() {
+        return inning;
+    }
+
     public String getHomeTeam() {
         return homeTeam;
     }

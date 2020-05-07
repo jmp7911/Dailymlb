@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.model.Game;
+import com.jmp.dailymlb.model.Stadium;
 import com.jmp.dailymlb.presenter.GamesContract;
 import com.jmp.dailymlb.presenter.GamesPresenter;
 
@@ -61,7 +62,7 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
         gamesPresenter.getGamesByDate(2019, 7, 31);
-
+        gamesPresenter.getStadium();
     }
 
     @Override
@@ -75,4 +76,8 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         gamesAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void setStadiums(List<Stadium> stadiums) {
+        gamesAdapter.setStadiums(stadiums);
+    }
 }
