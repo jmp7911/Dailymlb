@@ -8,7 +8,5 @@ public interface MainContract {
     public interface Presenter {
         void attachView(View view);
         void detachView();
-
-
     }
 }

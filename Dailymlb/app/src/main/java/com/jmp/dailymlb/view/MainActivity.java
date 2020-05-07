@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         presenter = new MainPresenter();
         presenter.attachView(this);
 
+
     }
 
     @Override

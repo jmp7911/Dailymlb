@@ -1,5 +1,6 @@
 package com.jmp.dailymlb.presenter;
 
+
 public class MainPresenter implements MainContract.Presenter {
     private MainContract.View mainView;
 
@@ -12,5 +13,6 @@ public class MainPresenter implements MainContract.Presenter {
     public void detachView() {
         mainView = null;
     }
+
 
 }

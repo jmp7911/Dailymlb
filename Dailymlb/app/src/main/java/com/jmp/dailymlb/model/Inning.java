@@ -33,4 +33,5 @@ public class Inning {
     public int getHomeTeamRuns() {
         return homeTeamRuns;
     }
+
 }
