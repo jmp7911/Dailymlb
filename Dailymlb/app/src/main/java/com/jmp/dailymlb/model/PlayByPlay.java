@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 public class PlayByPlay {
     @SerializedName("Game")
-    GameScore game;
+    Game game;
     @SerializedName("Plays")
     ArrayList<Play> plays;
 
-    public GameScore getGame() {
+    public Game getGame() {
         return game;
     }
 
-    public void setGame(GameScore game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 

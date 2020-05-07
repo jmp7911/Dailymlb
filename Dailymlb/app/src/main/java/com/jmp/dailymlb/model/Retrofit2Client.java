@@ -31,3 +31,4 @@ public class Retrofit2Client {
     public APIService getApiService() {
         return apiService;
     }
+}
