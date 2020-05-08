@@ -8,15 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.model.Constants;
 import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Stadium;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -27,6 +23,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     private List<Stadium> stadiums;
     public GamesAdapter() {
         this.games = new ArrayList<>();
+        this.stadiums = new ArrayList<>();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,40 +69,30 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         holder.txtHomeTeam.setText(game.getHomeTeam());
         holder.txtAwayScore.setText(String.valueOf(game.getAwayTeamRuns()));
         holder.txtHomeScore.setText(String.valueOf(game.getHomeTeamRuns()));
-        holder.txtStatus.setText(translateStatus(game.getStatus()));
-        for(Stadium stadium : stadiums) {
-            if (games.get(position).getStadiumId() == stadium.getStadiumId()) {
-                holder.txtStadium.setText(stadium.getName());
+        for(Constants.Status status : Constants.Status.values()) {
+            if (String.valueOf(status).equals(game.getStatus())) {
+                holder.txtStatus.setText(status.getStatus());
+            }
+        }
+        for(Constants.Team team : Constants.Team.values()) {
+            if (String.valueOf(team).equals(game.getAwayTeam())) {
+                holder.imgAwayIcon.setImageResource(team.getDrawableId());
+            } else if (String.valueOf(team).equals(game.getHomeTeam())) {
+                holder.imgHomeIcon.setImageResource(team.getDrawableId());
+            }
+        }
+        if (!stadiums.isEmpty()) {
+            for(Stadium stadium : stadiums) {
+                if (games.get(position).getStadiumId() == stadium.getStadiumId()) {
+                    holder.txtStadium.setText(stadium.getName());
+                }
             }
         }
     }
     private String formatDateTime(String dateTime) {
         return dateTime.substring(11, 16);
     }
-    private String translateStatus(String status) {
-        String res = "";
-        switch (status) {
-            case "Scheduled" :
-                res = "예정";
-                break;
-            case "InProgress" :
-                res = "진행";
-                break;
-            case "Final" :
-                res = "종료";
-                break;
-            case "Suspended" :
-                res = "중지";
-                break;
-            case "PostPoned" :
-                res = "연기";
-                break;
-            case "Canceled" :
-                res = "취소";
-                break;
-        }
-        return res;
-    }
+
     @Override
     public int getItemCount() {
         return games.size();
@@ -117,5 +104,9 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
 
     public void setStadiums(List<Stadium> stadiums) {
         this.stadiums = stadiums;
+    }
+
+    public List<Stadium> getStadiums() {
+        return stadiums;
     }
 }
