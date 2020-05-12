@@ -1,6 +1,7 @@
 package com.jmp.dailymlb.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.presenter.MainContract;
 import com.jmp.dailymlb.presenter.MainPresenter;
 
@@ -22,8 +24,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         BottomNavigationView navigationView = findViewById(R.id.navi_view);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        GamesByDateFragment dateFragment = new GamesByDateFragment();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        GamesByDateFragment dateFragment = new GamesByDateFragment(new OnClickResultListener() {
+            @Override
+            public void onClickResult(int gameId) {
+                GameReviewFragment gameReviewFragment = new GameReviewFragment(gameId);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_layout, gameReviewFragment);
+                transaction.addToBackStack(null).commit();
+            }
+        });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_layout, dateFragment).commit();
 
@@ -43,4 +53,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showToast(String title) {
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void setOnClickResultListener(OnClickResultListener clickResultListener) {
+
+    }
+
 }

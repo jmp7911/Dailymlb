@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.model.Constants;
 import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Stadium;
@@ -21,9 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> {
     private List<Game> games;
     private List<Stadium> stadiums;
-    public GamesAdapter() {
+    private OnClickResultListener clickResultListener;
+    public GamesAdapter(OnClickResultListener clickResultListener) {
         this.games = new ArrayList<>();
         this.stadiums = new ArrayList<>();
+        this.clickResultListener = clickResultListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,7 +53,18 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
             txtDateTime = itemView.findViewById(R.id.datetime);
             txtStatus = itemView.findViewById(R.id.text_status);
             btnResult = itemView.findViewById(R.id.btn_result);
+
+            btnResult.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        clickResultListener.onClickResult(games.get(pos).getGameId());
+                    }
+                }
+            });
         }
+
     }
 
     @NonNull
@@ -89,6 +103,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
             }
         }
     }
+
     private String formatDateTime(String dateTime) {
         return dateTime.substring(11, 16);
     }
@@ -109,4 +124,5 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     public List<Stadium> getStadiums() {
         return stadiums;
     }
+
 }
