@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.jmp.dailymlb.model.Constants.KEY;
+import static com.jmp.dailymlb.model.Constants.API_KEY;
 
 public class GamesPresenter implements GamesContract.Presenter {
     private GamesContract.View view ;
@@ -36,13 +36,23 @@ public class GamesPresenter implements GamesContract.Presenter {
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        Call<List<Game>> gamesByDate = Retrofit2Client.getInstance().getApiService()
-                .getGamesByDate(simpleDateFormat.format(calendar.getTime()), KEY);
-        gamesByDate.enqueue(new Callback<List<Game>>() {
+        Call<List<Game>> request = Retrofit2Client.getInstance().getApiService()
+                .getGamesByDate(simpleDateFormat.format(calendar.getTime()), API_KEY);
+        request.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                if (response.code() == 200) {
-                    view.setGames(response.body());
+                switch (response.code()) {
+                    case 200 :
+                        view.setGames(response.body());
+                        break;
+                    case 400 :
+                        view.showToast("Error : Client error");
+                    case 404 :
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500 :
+                        view.showToast("Error : Internal Server error");
+                        break;
                 }
             }
 
@@ -54,14 +64,24 @@ public class GamesPresenter implements GamesContract.Presenter {
     }
 
     @Override
-    public void getStadium() {
-        Call<List<Stadium>> stadiums = Retrofit2Client.getInstance().getApiService()
-                .getStadiums(KEY);
-        stadiums.enqueue(new Callback<List<Stadium>>() {
+    public void getStadiums() {
+        Call<List<Stadium>> request = Retrofit2Client.getInstance().getApiService()
+                .getStadiums(API_KEY);
+        request.enqueue(new Callback<List<Stadium>>() {
             @Override
             public void onResponse(Call<List<Stadium>> call, Response<List<Stadium>> response) {
-                if (response.code() == 200) {
-                    view.setStadiums(response.body());
+                switch (response.code()) {
+                    case 200 :
+                        view.setStadiums(response.body());
+                        break;
+                    case 400 :
+                        view.showToast("Error : Client Error");
+                    case 404 :
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500 :
+                        view.showToast("Error : Internal Server error");
+                        break;
                 }
             }
 
