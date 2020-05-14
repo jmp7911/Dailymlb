@@ -11,7 +11,9 @@ import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.model.Constants;
 import com.jmp.dailymlb.model.Game;
+import com.jmp.dailymlb.model.GameStatus;
 import com.jmp.dailymlb.model.Stadium;
+import com.jmp.dailymlb.model.Teams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +85,12 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         holder.txtHomeTeam.setText(game.getHomeTeam());
         holder.txtAwayScore.setText(String.valueOf(game.getAwayTeamRuns()));
         holder.txtHomeScore.setText(String.valueOf(game.getHomeTeamRuns()));
-        for(Constants.Status status : Constants.Status.values()) {
+        for(GameStatus status : GameStatus.values()) {
             if (String.valueOf(status).equals(game.getStatus())) {
                 holder.txtStatus.setText(status.getStatus());
             }
         }
-        for(Constants.Team team : Constants.Team.values()) {
+        for(Teams team : Teams.values()) {
             if (String.valueOf(team).equals(game.getAwayTeam())) {
                 holder.imgAwayIcon.setImageResource(team.getDrawableId());
             } else if (String.valueOf(team).equals(game.getHomeTeam())) {
@@ -97,7 +99,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
         }
         if (!stadiums.isEmpty()) {
             for(Stadium stadium : stadiums) {
-                if (games.get(position).getStadiumId() == stadium.getStadiumId()) {
+                if (game.getStadiumId() == stadium.getStadiumId()) {
                     holder.txtStadium.setText(stadium.getName());
                 }
             }

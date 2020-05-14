@@ -54,7 +54,7 @@ public class GamesPresenter implements GamesContract.Presenter {
     }
 
     @Override
-    public void getStadium() {
+    public void getStadiums() {
         Call<List<Stadium>> stadiums = Retrofit2Client.getInstance().getApiService()
                 .getStadiums(KEY);
         stadiums.enqueue(new Callback<List<Stadium>>() {

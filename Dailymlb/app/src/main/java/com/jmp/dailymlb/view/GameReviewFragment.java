@@ -5,21 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.model.Constants;
+import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.GameReviewWrapper;
 import com.jmp.dailymlb.model.Inning;
+import com.jmp.dailymlb.model.Play;
 import com.jmp.dailymlb.model.PlayByPlay;
+import com.jmp.dailymlb.model.Teams;
 import com.jmp.dailymlb.presenter.GameReviewContract;
 import com.jmp.dailymlb.presenter.GameReviewPresenter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class GameReviewFragment extends Fragment implements GameReviewContract.View {
@@ -28,13 +33,14 @@ public class GameReviewFragment extends Fragment implements GameReviewContract.V
     int gameId;
     PlayByPlay playByPlay;
     GameReviewPresenter gameReviewPresenter;
-
+    TableLayout tableStatistics;
     public GameReviewFragment(int gameId) {
         this.gameId = gameId;
         context = null;
         view = null;
         playByPlay = null;
         gameReviewPresenter = null;
+        tableStatistics = null;
     }
 
     @Override
@@ -75,70 +81,158 @@ public class GameReviewFragment extends Fragment implements GameReviewContract.V
         wrapper.getAwayScore().setText(String.valueOf(playByPlay.getGame().getAwayTeamRuns()));
         wrapper.getReviewStatus().setText(playByPlay.getGame().getStatus());
         wrapper.getHomeScore().setText(String.valueOf(playByPlay.getGame().getHomeTeamRuns()));
-        for(Constants.Team team : Constants.Team.values()) {
+        for(Teams team : Teams.values()) {
             if (String.valueOf(team).equals(playByPlay.getGame().getAwayTeam())) {
                 wrapper.getAwayIcon().setImageResource(team.getDrawableId());
             } else if (String.valueOf(team).equals(playByPlay.getGame().getHomeTeam())) {
                 wrapper.getHomeIcon().setImageResource(team.getDrawableId());
             }
         }
-        setStatistics(wrapper);
-        setBoard(wrapper);
+        bindOnStatistics(wrapper);
+        bindOnBoard(wrapper);
     }
-    private void setBoard(GameReviewWrapper wrapper) {
-        wrapper.getAwayTeamOnBoard().setText(playByPlay.getGame().getAwayTeam());
-        wrapper.getHomeTeamOnBoard().setText(playByPlay.getGame().getHomeTeam());
-        ArrayList<Inning> innings = playByPlay.getGame().getInnings();
+
+    private void bindOnBoard(GameReviewWrapper wrapper) {
+        Game game = playByPlay.getGame();
+        ArrayList<Inning> innings = game.getInnings();
+        TableRow row1 = new TableRow(context);
+        TableRow row2 = new TableRow(context);
+        TableRow row3 = new TableRow(context);
+        wrapper.getTableBoard().addView(row1);
+        wrapper.getTableBoard().addView(row2);
+        wrapper.getTableBoard().addView(row3);
+        TableRow.LayoutParams tableRowLayoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+
+        row1.setLayoutParams(tableRowLayoutParams);
+        row2.setLayoutParams(tableRowLayoutParams);
+        row3.setLayoutParams(tableRowLayoutParams);
+        addBoardFirstColumn(row1, row2, row3);
+
         for(Inning inning : innings) {
-            if (inning.getInningNumber() == 1) {
-                wrapper.getAwayRunOn1stInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn1stInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 2) {
-                wrapper.getAwayRunOn2ndInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn2ndInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 3) {
-                wrapper.getAwayRunOn3rdInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn3rdInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 4) {
-                wrapper.getAwayRunOn4thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn4thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 5) {
-                wrapper.getAwayRunOn5thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn5thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 6) {
-                wrapper.getAwayRunOn6thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn6thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 7) {
-                wrapper.getAwayRunOn7thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn7thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 8) {
-                wrapper.getAwayRunOn8thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn8thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
-            } else if (inning.getInningNumber() == 9) {
-                wrapper.getAwayRunOn9thInning().setText(String.valueOf(inning.getAwayTeamRuns()));
-                wrapper.getHomeRunOn9thInning().setText(String.valueOf(inning.getHomeTeamRuns()));
+            addBoardColumn(row1, String.valueOf(inning.getInningNumber()), row2, String.valueOf(inning.getAwayTeamRuns()),
+                    row3, String.valueOf(inning.getHomeTeamRuns()));
+        }
+        addBoardColumn(row1, "R", row2, String.valueOf(game.getAwayTeamRuns()),
+                row3, String.valueOf(game.getHomeTeamRuns()));
+        addBoardColumn(row1, "H", row2, String.valueOf(game.getAwayTeamHits()),
+                row3, String.valueOf(game.getHomeTeamHits()));
+        addBoardColumn(row1, "E", row2, String.valueOf(game.getAwayTeamErrors()),
+                row3, String.valueOf(game.getHomeTeamErrors()));
+        addBoardColumn(row1, "B", row2, countBases(game.getAwayTeamId()),
+                row3, countBases(game.getHomeTeamId()));
+    }
+    private void addBoardFirstColumn(TableRow row1, TableRow row2, TableRow row3) {
+        TextView blankTextView = new TextView(context);
+        TextView awayTeam = new TextView(context);
+        TextView homeTeam = new TextView(context);
+        row1.addView(blankTextView);
+        row2.addView(awayTeam);
+        row3.addView(homeTeam);
+        float scale = context.getResources().getDisplayMetrics().density;
+        int startDP = (int)scale;
+
+        TableRow.LayoutParams layoutParams = (TableRow.LayoutParams)blankTextView.getLayoutParams();
+        layoutParams.setMarginStart(startDP);
+        blankTextView.setLayoutParams(layoutParams);
+        layoutParams = (TableRow.LayoutParams)awayTeam.getLayoutParams();
+        layoutParams.setMarginStart(startDP);
+        awayTeam.setLayoutParams(layoutParams);
+        layoutParams = (TableRow.LayoutParams)homeTeam.getLayoutParams();
+        layoutParams.setMarginStart(startDP);
+        homeTeam.setLayoutParams(layoutParams);
+
+        awayTeam.setText(playByPlay.getGame().getAwayTeam());
+        homeTeam.setText(playByPlay.getGame().getHomeTeam());
+
+    }
+    private void addBoardColumn(TableRow row1, String text1, TableRow row2, String text2, TableRow row3, String text3) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        int startDP = (int)scale;
+
+        TextView view1 = new TextView(context);
+        row1.addView(view1);
+        TableRow.LayoutParams layoutParams = (TableRow.LayoutParams)view1.getLayoutParams();
+        layoutParams.setMarginStart(startDP);
+        layoutParams.width = startDP * 20;
+        view1.setLayoutParams(layoutParams);
+        view1.setText(text1);
+        view1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view1.setBackgroundColor(ContextCompat.getColor(context, R.color.color1));
+        TextView view2 = new TextView(context);
+        row2.addView(view2);
+        layoutParams = (TableRow.LayoutParams)view2.getLayoutParams();
+        layoutParams.width = startDP * 20;
+        layoutParams.setMarginStart(startDP);
+        view2.setLayoutParams(layoutParams);
+        view2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view2.setText(text2);
+        view2.setBackgroundColor(ContextCompat.getColor(context, R.color.color2));
+        TextView view3 = new TextView(context);
+        row3.addView(view3);
+        layoutParams = (TableRow.LayoutParams)view3.getLayoutParams();
+        layoutParams.width = startDP * 20;
+        layoutParams.setMarginStart(startDP);
+        view3.setLayoutParams(layoutParams);
+        view3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view3.setText(text3);
+        view3.setBackgroundColor(ContextCompat.getColor(context, R.color.color3));
+
+    }
+    private String countBases(int teamId) {
+        int count = 0;
+        for(Play play : playByPlay.getPlays()) {
+            if (play.getHitterTeamId() == teamId && play.isWalk()) {
+                count++;
             }
         }
-        wrapper.getAwayHitsOnBoard().setText(String.valueOf(playByPlay.getGame().getAwayTeamHits()));
-        wrapper.getHomeHitsOnBoard().setText(String.valueOf(playByPlay.getGame().getHomeTeamHits()));
-        wrapper.getAwayRunsOnBoard().setText(String.valueOf(playByPlay.getGame().getAwayTeamRuns()));
-        wrapper.getHomeRunsOnBoard().setText(String.valueOf(playByPlay.getGame().getHomeTeamRuns()));
-        wrapper.getAwayErrorsOnBoard().setText(String.valueOf(playByPlay.getGame().getAwayTeamErrors()));
-        wrapper.getHomeErrorsOnBoard().setText(String.valueOf(playByPlay.getGame().getHomeTeamErrors()));
-        wrapper.getAwayBases().setText(String.valueOf(0));
-        wrapper.getHomeBases().setText(String.valueOf(0));
+        return String.valueOf(count);
     }
-    private void setStatistics(GameReviewWrapper wrapper) {
-        wrapper.getAwayHitsOnStatistics().setText(String.valueOf(playByPlay.getGame().getAwayTeamHits()));
-        wrapper.getAwayTeamOnStatistics().setText(playByPlay.getGame().getAwayTeam());
-        wrapper.getAwayHomeRuns().setText(String.valueOf(0));
-        wrapper.getAwayPitcherStrikeOut().setText(String.valueOf(0));
-        wrapper.getAwayErrorsOnStatistics().setText(String.valueOf(playByPlay.getGame().getAwayTeamErrors()));
-        wrapper.getHomeTeamOnStatistics().setText(playByPlay.getGame().getHomeTeam());
-        wrapper.getHomeHitsOnStatistics().setText(String.valueOf(playByPlay.getGame().getHomeTeamHits()));
-        wrapper.getHomeHomeRuns().setText(String.valueOf(0));
-        wrapper.getHomePitcherStrikeOut().setText(String.valueOf(0));
-        wrapper.getHomeErrorsOnStatistics().setText(String.valueOf(playByPlay.getGame().getHomeTeamErrors()));
+    private void bindOnStatistics(GameReviewWrapper wrapper) {
+        Game game = playByPlay.getGame();
+        wrapper.getAwayTeamOnStatistics().setText(game.getAwayTeam());
+        wrapper.getHomeTeamOnStatistics().setText(game.getHomeTeam());
+        wrapper.getAwayHitsOnStatistics().setText(String.valueOf(game.getAwayTeamHits()));
+        wrapper.getHomeHitsOnStatistics().setText(String.valueOf(game.getHomeTeamHits()));
+        wrapper.getAwayHomeRuns().setText(countHomeRuns(game.getAwayTeamId()));
+        wrapper.getHomeHomeRuns().setText(countHomeRuns(game.getHomeTeamId()));
+        wrapper.getAwayPitcherStrikeOut().setText(countPitcherStrikeOut(game.getAwayTeamId()));
+        wrapper.getHomePitcherStrikeOut().setText(countPitcherStrikeOut(game.getHomeTeamId()));
+        wrapper.getAwayErrorsOnStatistics().setText(String.valueOf(game.getAwayTeamErrors()));
+        wrapper.getHomeErrorsOnStatistics().setText(String.valueOf(game.getHomeTeamErrors()));
+        wrapper.getAwayStolenBases().setText(countStolenBases(game.getAwayTeamId()));
+        wrapper.getHomeStolenBases().setText(countStolenBases(game.getHomeTeamId()));
+    }
+    private void addRowDetail() {
+        
+    }
+    private String countStolenBases(int teamId) {
+        int count = 0;
+        for(Play play : playByPlay.getPlays()) {
+            if (play.getHitterTeamId() == teamId
+                    && play.getResult().equals(getResources().getString(R.string.play_result_stolen_base))) {
+                count++;
+            }
+        }
+        return String.valueOf(count);
+    }
+    private String countHomeRuns(int teamId) {
+        int count = 0;
+        for(Play play : playByPlay.getPlays()) {
+            if (play.getHitterTeamId() == teamId
+                    && play.getResult().equals(getResources().getString(R.string.play_result_home_run))) {
+                count++;
+            }
+        }
+        return String.valueOf(count);
+    }
+    private String countPitcherStrikeOut(int teamId) {
+        int count = 0;
+        for(Play play : playByPlay.getPlays()) {
+            if (play.getPitcherTeamId() == teamId && play.isStrikeout()) {
+                count++;
+            }
+        }
+        return String.valueOf(count);
     }
     @Override
     public void showToast(String title) {
