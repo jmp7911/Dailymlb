@@ -12,14 +12,12 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:id="@+id/datetime"
-            android:text="07 : 20"
             android:layout_marginEnd="15dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="PETCO PARK"
             android:id="@+id/stadium"
             />
     </LinearLayout>
@@ -27,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="50dp"
@@ -36,19 +35,35 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:id="@+id/text_away_team"
             />
         <TextView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/text_away_score"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            />
+        <TextView
             android:layout_width="50dp"
-            android:layout_height="70dp"
+            android:layout_height="35dp"
             android:textSize="20sp"
-            android:text="VS"
+            android:id="@+id/text_status"
+            android:background="#E2E2E2"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/text_home_score"
+            android:textAlignment="center"
+            android:textSize="25sp"
             />
         <TextView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:id="@+id/text_home_team"
             />
         <ImageView
