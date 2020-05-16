@@ -70,9 +70,7 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         super.onActivityCreated(savedInstanceState);
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
-        if (!gamesAdapter.getStadiums().isEmpty()) {
-            gamesPresenter.getStadiums();
-        }
+        gamesPresenter.getStadiums();
         gamesPresenter.getGamesByDate(2019, 7, 31);
 
     }

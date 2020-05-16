@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/blank">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,8 +41,7 @@
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:textAlignment="center"
-            android:textSize="25sp"
-            />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/review_text_status"
@@ -48,7 +49,7 @@
             android:layout_height="35dp"
             android:background="#E2E2E2"
             android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/review_text_home_score"
@@ -91,9 +92,9 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/text_winning_pitcher_label"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="승리투수 : " />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/text_winning_pitcher"
@@ -122,133 +123,257 @@
 
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/review_table_board"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:layout_gravity="center"
-        >
-
-
-    </TableLayout>
-    <TableLayout
-        android:id="@+id/review_table_statistics"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_height="wrap_content">
 
-        android:stretchColumns="*">
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_team"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TableLayout
+                android:id="@+id/review_table_board"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp">
+
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_statistics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
-                android:textAlignment="textStart"/>
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
 
-            <TextView
+                android:stretchColumns="0,2">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_team"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:text="통계"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_team"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_hit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="V S"
-                android:layout_marginEnd="1dp"
-                android:textAlignment="center"/>
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:stretchColumns="0,2">
 
-            <TextView
-                android:id="@+id/statistics_home_team"
-                android:textAlignment="textEnd"
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_hit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/statistics_hit"
+                        android:layout_width="100dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="1dp"
+                        android:text="안타"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_hit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_home_run"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="1dp"
-                />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_hit"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="안타"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/statistics_home_hit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_home_run"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="홈런"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/statistics_home_home_run"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_stolen_base"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="도루"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/statistics_home_stolen_base"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_pitcher_strike_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="탈삼진"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/statistics_home_pitcher_strike_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/statistics_away_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="실책"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/statistics_home_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
-        </TableRow>
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:stretchColumns="0,2">
 
-    </TableLayout>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_home_run"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_run"
+                        android:layout_width="100dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="1dp"
+                        android:text="홈런"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_home_run"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_stolen_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:stretchColumns="0,2">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_stolen_base"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/statistics_stolen_base"
+                        android:layout_width="100dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="1dp"
+                        android:text="도루"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_stolen_base"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_pitcher_strikeout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:stretchColumns="0,2">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_pitcher_strike_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/statistics_pitcher_strike_out"
+                        android:layout_width="100dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="1dp"
+                        android:text="탈삼진"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_pitcher_strike_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/review_table_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:stretchColumns="0,2">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/statistics_away_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/statistics_error"
+                        android:layout_width="100dp"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="1dp"
+                        android:text="실책"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/statistics_home_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:textAlignment="textEnd" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
