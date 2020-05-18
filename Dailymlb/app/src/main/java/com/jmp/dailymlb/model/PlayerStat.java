@@ -31,6 +31,12 @@ public class PlayerStat {
     float homeRuns;
     @SerializedName("BattingAverage")
     float avg;
+    @SerializedName("OnBasePlusSlugging")
+    float ops;
+    @SerializedName("OnBasePercentage")
+    float obp;
+    @SerializedName("SluggingPercentage")
+    float slg;
     @SerializedName("StolenBases")
     float stolenBases;
     @SerializedName("RunsBattedIn")
@@ -112,6 +118,18 @@ public class PlayerStat {
 
     public float getAvg() {
         return avg;
+    }
+
+    public float getOps() {
+        return ops;
+    }
+
+    public float getObp() {
+        return obp;
+    }
+
+    public float getSlg() {
+        return slg;
     }
 
     public float getStolenBases() {

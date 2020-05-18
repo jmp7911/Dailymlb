@@ -2,6 +2,7 @@ package com.jmp.dailymlb.iface;
 
 
 
+import com.jmp.dailymlb.model.PlayerStat;
 import com.jmp.dailymlb.model.Stadium;
 import com.jmp.dailymlb.model.Game;
 
@@ -17,4 +18,6 @@ public interface APIService {
     Call<List<Game>> getGamesByDate(@Path("date") String date, @Query("key") String key);
     @GET("/v3/mlb/scores/json/Stadiums")
     Call<List<Stadium>> getStadiums(@Query("key") String key);
+    @GET("/v3/mlb/stats/json/PlayerSeasonStats/{season}")
+    Call<List<PlayerStat>> getPlayerStats(@Path("season") int season, @Query("key") String key);
 }
