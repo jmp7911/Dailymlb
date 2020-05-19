@@ -28,4 +28,37 @@
         app:layout_constraintTop_toBottomOf="@+id/player_rank_batter">
 
     </TableLayout>
+    <TableLayout
+        android:id="@+id/player_rank_home_run_or_winning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/player_rank_average"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player_rank_pitcher">
+
+    </TableLayout>
+    <TableLayout
+        android:id="@+id/player_rank_run_batted_in_or_pitcher_strike_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player_rank_average">
+
+    </TableLayout>
+    <TableLayout
+        android:id="@+id/player_rank_stolen_base_or_saving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/player_rank_run_batted_in_or_pitcher_strike_out"
+        app:layout_constraintTop_toBottomOf="@id/player_rank_home_run_or_winning">
+
+    </TableLayout>
+    <TableLayout
+        android:id="@+id/player_rank_ops_or_whip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player_rank_run_batted_in_or_pitcher_strike_out">
+
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

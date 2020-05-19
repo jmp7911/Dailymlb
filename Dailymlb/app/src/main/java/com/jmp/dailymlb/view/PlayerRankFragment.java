@@ -2,7 +2,6 @@ package com.jmp.dailymlb.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +32,10 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
     Button btnBatterRank;
     Button btnPitcherRank;
     TableLayout tableAverage;
+    TableLayout tableHomeRunOrWinning;
+    TableLayout tableRunBattedInOrPitcherStrikeOut;
+    TableLayout tableStolenBaseOrSaving;
+    TableLayout tableOpsOrWhip;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -53,6 +56,10 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         btnBatterRank = view.findViewById(R.id.player_rank_batter);
         btnPitcherRank = view.findViewById(R.id.player_rank_pitcher);
         tableAverage = view.findViewById(R.id.player_rank_average);
+        tableHomeRunOrWinning = view.findViewById(R.id.player_rank_home_run_or_winning);
+        tableRunBattedInOrPitcherStrikeOut = view.findViewById(R.id.player_rank_run_batted_in_or_pitcher_strike_out);
+        tableStolenBaseOrSaving = view.findViewById(R.id.player_rank_stolen_base_or_saving);
+        tableOpsOrWhip = view.findViewById(R.id.player_rank_ops_or_whip);
         playerRankPresenter = new PlayerRankPresenter();
         playerRankPresenter.attachView(this);
         return view;
@@ -62,6 +69,18 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         playerRankPresenter.getPlayerStats(new Date());
+        btnBatterRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBatterRank();
+            }
+        });
+        btnPitcherRank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPitcherRank();
+            }
+        });
     }
 
     @Override
@@ -75,10 +94,32 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         if (playerStats.isEmpty()) {
             return;
         }
-        onBindBatterRankView(tableAverage, getTOP5PlayerStats(R.string.batting_average), R.string.batting_average);
-    }
 
-    private void onBindBatterRankView(TableLayout tableLayout, List<PlayerStat> TOP5PlayerStats, int resId) {
+    }
+    private void showBatterRank() {
+        clearTables();
+        onBindTableLayout(tableAverage, getTOP5PlayerStats(R.string.batting_average), R.string.batting_average);
+        onBindTableLayout(tableHomeRunOrWinning, getTOP5PlayerStats(R.string.home_run), R.string.home_run);
+        onBindTableLayout(tableRunBattedInOrPitcherStrikeOut, getTOP5PlayerStats(R.string.runs_batted_in), R.string.runs_batted_in);
+        onBindTableLayout(tableStolenBaseOrSaving, getTOP5PlayerStats(R.string.stolen_base), R.string.stolen_base);
+        onBindTableLayout(tableOpsOrWhip, getTOP5PlayerStats(R.string.on_base_plus_slugging), R.string.on_base_plus_slugging);
+    }
+    private void showPitcherRank() {
+        clearTables();
+        onBindTableLayout(tableAverage, getTOP5PlayerStats(R.string.earned_runs_average), R.string.earned_runs_average);
+        onBindTableLayout(tableHomeRunOrWinning, getTOP5PlayerStats(R.string.winning), R.string.winning);
+        onBindTableLayout(tableRunBattedInOrPitcherStrikeOut, getTOP5PlayerStats(R.string.pitcher_strike_out), R.string.pitcher_strike_out);
+        onBindTableLayout(tableStolenBaseOrSaving, getTOP5PlayerStats(R.string.saving), R.string.saving);
+        onBindTableLayout(tableOpsOrWhip, getTOP5PlayerStats(R.string.walks_hits_per_innings_pitched), R.string.walks_hits_per_innings_pitched);
+    }
+    private void clearTables() {
+        tableAverage.removeAllViews();
+        tableHomeRunOrWinning.removeAllViews();
+        tableRunBattedInOrPitcherStrikeOut.removeAllViews();
+        tableStolenBaseOrSaving.removeAllViews();
+        tableOpsOrWhip.removeAllViews();
+    }
+    private void onBindTableLayout(TableLayout tableLayout, List<PlayerStat> TOP5PlayerStats, int resId) {
         TableRow title = new TableRow(getContext());
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         title.setLayoutParams(layoutParams);
@@ -104,6 +145,26 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
             row.addView(column4);
             if (resId == R.string.batting_average) {
                 column4.setText(String.valueOf(TOP5PlayerStats.get(i).getAvg()));
+            } else if (resId == R.string.home_run) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getHomeRuns()));
+            } else if (resId == R.string.hit) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getHits()));
+            } else if (resId == R.string.runs_batted_in) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getRunsBattedIn()));
+            } else if (resId == R.string.stolen_base) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getStolenBases()));
+            } else if (resId == R.string.on_base_plus_slugging) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getOps()));
+            } else if (resId == R.string.earned_runs_average) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getEra()));
+            } else if (resId == R.string.winning) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getWins()));
+            } else if (resId == R.string.saving) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getSaves()));
+            } else if (resId == R.string.pitcher_strike_out) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getPitchingStrikeout()));
+            } else if (resId == R.string.walks_hits_per_innings_pitched) {
+                column4.setText(String.valueOf(TOP5PlayerStats.get(i).getWhip()));
             }
         }
 
@@ -114,6 +175,25 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
             rank[i] = 1;
             for(int j = 0; j < TOP5PlayerStats.size(); j++) {
                 if (resId == R.string.batting_average && TOP5PlayerStats.get(i).getAvg() < TOP5PlayerStats.get(j).getAvg()) {
+                    rank[i]++;
+                } else if (resId == R.string.home_run &&
+                        TOP5PlayerStats.get(i).getHomeRuns() < TOP5PlayerStats.get(j).getHomeRuns()) {
+                    rank[i]++;
+                } else if (resId == R.string.runs_batted_in && TOP5PlayerStats.get(i).getRunsBattedIn() < TOP5PlayerStats.get(j).getRunsBattedIn()) {
+                    rank[i]++;
+                } else if (resId == R.string.stolen_base && TOP5PlayerStats.get(i).getStolenBases() < TOP5PlayerStats.get(j).getStolenBases()) {
+                    rank[i]++;
+                } else if (resId == R.string.on_base_plus_slugging && TOP5PlayerStats.get(i).getOps() < TOP5PlayerStats.get(j).getOps()) {
+                    rank[i]++;
+                } else if (resId == R.string.earned_runs_average && TOP5PlayerStats.get(i).getEra() < TOP5PlayerStats.get(j).getEra()) {
+                    rank[i]++;
+                } else if (resId == R.string.winning && TOP5PlayerStats.get(i).getWins() < TOP5PlayerStats.get(j).getWins()) {
+                    rank[i]++;
+                } else if (resId == R.string.saving && TOP5PlayerStats.get(i).getSaves() < TOP5PlayerStats.get(j).getSaves()) {
+                    rank[i]++;
+                } else if (resId == R.string.pitcher_strike_out && TOP5PlayerStats.get(i).getPitchingStrikeout() < TOP5PlayerStats.get(j).getPitchingStrikeout()) {
+                    rank[i]++;
+                } else if (resId == R.string.walks_hits_per_innings_pitched && TOP5PlayerStats.get(i).getWhip() < TOP5PlayerStats.get(j).getWhip()) {
                     rank[i]++;
                 }
             }
@@ -127,8 +207,137 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
                 @Override
                 public int compare(PlayerStat playerStat, PlayerStat t1) {
                     if (playerStat.getAvg() > t1.getAvg()) {
-                        return 1;
+                        return -1;
                     } else if (playerStat.getAvg() == t1.getAvg()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.home_run) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getHomeRuns() > t1.getHomeRuns()) {
+                        return -1;
+                    } else if (playerStat.getHomeRuns() == t1.getHomeRuns()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.runs_batted_in) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getRunsBattedIn() > t1.getRunsBattedIn()) {
+                        return -1;
+                    } else if (playerStat.getRunsBattedIn() == t1.getRunsBattedIn()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.stolen_base) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getStolenBases() > t1.getStolenBases()) {
+                        return -1;
+                    } else if (playerStat.getStolenBases() == t1.getStolenBases()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.on_base_plus_slugging) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getOps() > t1.getOps()) {
+                        return -1;
+                    } else if (playerStat.getOps() == t1.getOps()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.earned_runs_average) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getEra() > t1.getEra()) {
+                        return 1;
+                    } else if (playerStat.getEra() == t1.getEra()) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.winning) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getWins() > t1.getWins()) {
+                        return -1;
+                    } else if (playerStat.getWins() == t1.getWins()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.saving) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getSaves() > t1.getSaves()) {
+                        return -1;
+                    } else if (playerStat.getSaves() == t1.getSaves()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.pitcher_strike_out) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (playerStat.getPitchingStrikeout() > t1.getPitchingStrikeout()) {
+                        return -1;
+                    } else if (playerStat.getPitchingStrikeout() == t1.getPitchingStrikeout()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            TOP5PlayerStat = playerStats.subList(0, 5);
+        } else if (resId == R.string.walks_hits_per_innings_pitched) {
+            playerStats.sort(new Comparator<PlayerStat>() {
+                @Override
+                public int compare(PlayerStat playerStat, PlayerStat t1) {
+                    if (!playerStat.getPositionCategory().equals("P")) {
+                        return 1;
+                    }
+                    if (playerStat.getWhip() > t1.getWhip()) {
+                        return 1;
+                    } else if (playerStat.getWhip() == t1.getWhip()) {
                         return 0;
                     } else {
                         return -1;
