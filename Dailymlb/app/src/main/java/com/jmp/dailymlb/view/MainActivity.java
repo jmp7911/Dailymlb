@@ -1,10 +1,10 @@
 package com.jmp.dailymlb.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -13,6 +13,8 @@ import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.presenter.MainContract;
 import com.jmp.dailymlb.presenter.MainPresenter;
+
+import static com.jmp.dailymlb.model.Constants.GAME_ID;
 
 
 public class MainActivity extends AppCompatActivity implements MainContract.View{
@@ -28,10 +30,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         GamesByDateFragment dateFragment = new GamesByDateFragment(new OnClickResultListener() {
             @Override
             public void onClickResult(int gameId) {
-                GameReviewFragment gameReviewFragment = new GameReviewFragment(gameId);
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_layout, gameReviewFragment);
-                transaction.addToBackStack(null).commit();
+                Intent intent = new Intent(getApplicationContext(), GameReviewActivity.class);
+                intent.putExtra(GAME_ID, gameId);
+                startActivity(intent);
             }
         });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
 
     }
+
 
     @Override
     protected void onDestroy() {
@@ -54,9 +56,5 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void setOnClickResultListener(OnClickResultListener clickResultListener) {
-
-    }
 
 }

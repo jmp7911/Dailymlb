@@ -63,6 +63,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
                     if (pos != RecyclerView.NO_POSITION) {
                         clickResultListener.onClickResult(games.get(pos).getGameId());
                     }
+
                 }
             });
         }

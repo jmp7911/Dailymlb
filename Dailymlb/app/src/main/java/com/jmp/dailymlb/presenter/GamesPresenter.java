@@ -41,8 +41,18 @@ public class GamesPresenter implements GamesContract.Presenter {
         gamesByDate.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                if (response.code() == 200) {
-                    view.setGames(response.body());
+                switch (response.code()) {
+                    case 200 :
+                        view.setGames(response.body());
+                        break;
+                    case 400 :
+                        view.showToast("Error : Client error");
+                        break;
+                    case 404 :
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500 :
+                        view.showToast("Error : Internal Server error");
                 }
             }
 

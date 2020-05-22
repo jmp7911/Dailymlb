@@ -29,12 +29,14 @@ public class GameReviewPresenter implements GameReviewContract.Presenter {
 
     @Override
     public void getPlayByPlay(int gameId) {
-        Call<PlayByPlay> getPlayByPlay = Retrofit2Client.getInstance().getApiService().getPlayByPlay(gameId, KEY);
-        getPlayByPlay.enqueue(new Callback<PlayByPlay>() {
+        Call<PlayByPlay> request = Retrofit2Client.getInstance().getApiService().getPlayByPlay(gameId, KEY);
+        request.enqueue(new Callback<PlayByPlay>() {
             @Override
             public void onResponse(Call<PlayByPlay> call, Response<PlayByPlay> response) {
                 if (response.code() == 200) {
                     view.setPlayByPlay(response.body());
+                } else if (response.code() == 404) {
+
                 }
             }
 
