@@ -84,7 +84,7 @@
                     <TextView
                         android:id="@+id/statistics_hit"
                         android:layout_width="100dp"
-                        android:layout_height="19dp"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="1dp"
                         android:text="안타"
                         android:textAlignment="center" />

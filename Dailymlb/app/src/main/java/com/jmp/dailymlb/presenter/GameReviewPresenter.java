@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.jmp.dailymlb.model.Constants.KEY;
+import static com.jmp.dailymlb.model.Constants.API_KEY;
 import static com.jmp.dailymlb.model.Retrofit2Client.getInstance;
 
 public class GameReviewPresenter implements GameReviewContract.Presenter {
@@ -29,7 +29,7 @@ public class GameReviewPresenter implements GameReviewContract.Presenter {
 
     @Override
     public void getPlayByPlay(int gameId) {
-        Call<PlayByPlay> request = Retrofit2Client.getInstance().getApiService().getPlayByPlay(gameId, KEY);
+        Call<PlayByPlay> request = Retrofit2Client.getInstance().getApiService().getPlayByPlay(gameId, API_KEY);
         request.enqueue(new Callback<PlayByPlay>() {
             @Override
             public void onResponse(Call<PlayByPlay> call, Response<PlayByPlay> response) {

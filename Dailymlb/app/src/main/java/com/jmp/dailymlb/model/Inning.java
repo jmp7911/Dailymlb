@@ -14,8 +14,6 @@ public class Inning {
     @SerializedName("HomeTeamRuns")
     int homeTeamRuns;
 
-    String awayTeam;
-    String homeTeam;
     public int getGameId() {
         return gameId;
     }
@@ -40,22 +38,6 @@ public class Inning {
         this.gameId = gameId;
     }
 
-    public String getAwayTeam() {
-        return awayTeam;
-    }
-
-    public String getHomeTeam() {
-        return homeTeam;
-    }
-
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
     public void setInningId(int inningId) {
         this.inningId = inningId;
     }
@@ -72,3 +54,4 @@ public class Inning {
         this.homeTeamRuns = homeTeamRuns;
     }
 }
+

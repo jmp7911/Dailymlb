@@ -20,4 +20,5 @@
     <string name="play_result_strike_swinging">Strikeout Swinging</string>
     <string name="play_result_walk">Walk</string>
     <string name="play_result_stolen_base">Stolen Base</string>
+    <string name="statistics_detail">detail</string>
 </resources>

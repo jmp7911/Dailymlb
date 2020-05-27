@@ -8,34 +8,32 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.model.Inning;
-import com.jmp.dailymlb.model.Play;
-import com.jmp.dailymlb.model.PlayByPlay;
-import com.jmp.dailymlb.model.PlayerStat;
+import com.jmp.dailymlb.model.ScoreBoard;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+
 
 public class GameReviewInningAdapter extends BaseAdapter {
-    private List<Inning> innings;
+    private ArrayList<String> scoreBoards;
     private LayoutInflater layoutInflater;
     private Context context;
-
     public GameReviewInningAdapter(Context context) {
-        this.context = context;
-        this.innings = new ArrayList<>();
+        this.scoreBoards = new ArrayList<>();
         this.layoutInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @Override
     public int getCount() {
-        return innings.size() * 3;
+        return scoreBoards.size();
     }
 
     @Override
-    public Inning getItem(int position) {
-        return innings.get(position);
+    public String getItem(int position) {
+        return scoreBoards.get(position);
     }
 
     @Override
@@ -46,25 +44,23 @@ public class GameReviewInningAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        final Inning inning = getItem(position);
-        int size = innings.size();
+        String item = getItem(position);
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.item_inning, null);
+            convertView = layoutInflater.inflate(R.layout.item_review, null);
             holder = new ViewHolder();
-            holder.textView = convertView.findViewById(R.id.item_inning_view_inning);
+            holder.textView = convertView.findViewById(R.id.review_item_text);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
-
-        if (inning != null) {
-            if (position % size == 0) {
-                if (position / size == 1) {
-                    holder.textView.setText(inning.getAwayTeam());
-                } else if (position / size == 2) {
-                    holder.textView.setText(inning.getHomeTeam());
-                }
-            }
+        holder.textView.setText(item);
+        int rowSize = scoreBoards.size() / 3;
+        if (position / rowSize == 0) {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.color1));
+        } else if (position / rowSize == 1) {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.color2));
+        } else {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.color3));
         }
         return convertView;
     }
@@ -73,7 +69,7 @@ public class GameReviewInningAdapter extends BaseAdapter {
         TextView textView;
     }
 
-    public void setInnings(List<Inning> innings) {
-        this.innings = innings;
+    public void setScoreBoards(ArrayList<String> scoreBoards) {
+        this.scoreBoards = scoreBoards;
     }
 }
