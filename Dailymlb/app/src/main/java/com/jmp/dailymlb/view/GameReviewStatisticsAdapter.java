@@ -1,7 +1,6 @@
 package com.jmp.dailymlb.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.jmp.dailymlb.R;
-import com.jmp.dailymlb.iface.OnClickDetailStatListener;
 
 import java.util.ArrayList;
 

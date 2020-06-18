@@ -4,6 +4,7 @@ package com.jmp.dailymlb.iface;
 
 import com.jmp.dailymlb.model.Play;
 import com.jmp.dailymlb.model.PlayByPlay;
+import com.jmp.dailymlb.model.PlayerStat;
 import com.jmp.dailymlb.model.Stadium;
 import com.jmp.dailymlb.model.Game;
 
@@ -21,4 +22,6 @@ public interface APIService {
     Call<List<Stadium>> getStadiums(@Query("key") String key);
     @GET("/v3/mlb/pbp/json/PlayByPlay/{GameID}")
     Call<PlayByPlay> getPlayByPlay(@Path("GameID") int gameId, @Query("key") String key);
+    @GET("/v3/mlb/stats/json/PlayerGameStatsByPlayer/{date}/{playerId}")
+    Call<List<PlayerStat>> getPlayerGameStat(@Path("date") String date, @Path("playerId") int playerId, @Query("key") String key);
 }

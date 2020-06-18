@@ -21,4 +21,6 @@
     <string name="play_result_walk">Walk</string>
     <string name="play_result_stolen_base">Stolen Base</string>
     <string name="statistics_detail">detail</string>
+    <string name="winning_pitcher">승리투수</string>
+    <string name="saving_pitcher">세이브투수</string>
 </resources>

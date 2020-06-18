@@ -14,6 +14,7 @@ import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Inning;
 import com.jmp.dailymlb.model.Play;
 import com.jmp.dailymlb.model.PlayByPlay;
+import com.jmp.dailymlb.model.PlayerStat;
 import com.jmp.dailymlb.model.Teams;
 import com.jmp.dailymlb.presenter.GameReviewContract;
 import com.jmp.dailymlb.presenter.GameReviewPresenter;
@@ -26,6 +27,7 @@ import static com.jmp.dailymlb.model.Constants.GAME_ID;
 
 public class GameReviewActivity extends AppCompatActivity implements GameReviewContract.View {
     PlayByPlay playByPlay;
+    PlayerStat playerGameStat;
     int gameId;
     GameReviewPresenter gameReviewPresenter;
     GridView inningBoard;
@@ -37,6 +39,10 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
     TextView homeScore;
     ImageView homeIcon;
     TextView gameStatus;
+    TextView winningPitcherText;
+    TextView winningPitcherLabel;
+    TextView savingPitcherText;
+    TextView savingPitcherLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,10 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
         homeIcon = findViewById(R.id.review_home_icon);
         homeScore = findViewById(R.id.review_text_home_score);
         gameStatus = findViewById(R.id.review_text_status);
+        winningPitcherText = findViewById(R.id.text_winning_pitcher);
+        winningPitcherLabel = findViewById(R.id.text_winning_pitcher_label);
+        savingPitcherText = findViewById(R.id.text_saving_pitcher);
+        savingPitcherLabel = findViewById(R.id.text_saving_pitcher_label);
         Intent intent = getIntent();
         gameId = intent.getIntExtra(GAME_ID, 0);
         gameReviewPresenter = new GameReviewPresenter();
@@ -57,7 +67,6 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
         gameReviewAdapter = new GameReviewInningAdapter(this);
         gameReviewStatisticsAdapter = new GameReviewStatisticsAdapter(this);
         gameReviewPresenter.getPlayByPlay(gameId);
-
 
     }
 
@@ -80,9 +89,29 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
                 homeIcon.setImageResource(team.getDrawableId());
             }
         }
+        if (game.getWinningPitcherId() != 0) {
+            gameReviewPresenter.getPlayerGameStat(game.getDateTime(), game.getWinningPitcherId());
+        }
+        if (game.getSavingPitcherId() != 0) {
+            gameReviewPresenter.getPlayerGameStat(game.getDateTime(), game.getSavingPitcherId());
+        }
         onBindBoardView();
         onBindStatisticsView();
+
     }
+
+    @Override
+    public void setPlayerGameStat(PlayerStat playerGameStat) {
+        this.playerGameStat = playerGameStat;
+        if (playerGameStat.getPlayerId() == playByPlay.getGame().getWinningPitcherId()) {
+            winningPitcherLabel.setText(R.string.winning_pitcher);
+            winningPitcherText.setText(playerGameStat.getName());
+        } else if (playerGameStat.getPlayerId() == playByPlay.getGame().getSavingPitcherId()) {
+            savingPitcherLabel.setText(R.string.saving_pitcher);
+            savingPitcherText.setText(playerGameStat.getName());
+        }
+    }
+
     private void onBindBoardView() {
         Game game = playByPlay.getGame();
         ArrayList<Inning> innings = game.getInnings();
