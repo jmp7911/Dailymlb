@@ -15,4 +15,6 @@
     <string name="pitcher_strike_out">탈삼진</string>
     <string name="holding">홀드</string>
     <string name="walks_hits_per_innings_pitched">WHIP</string>
+    <string name="american_league">AL</string>
+    <string name="national_league">NL</string>
 </resources>

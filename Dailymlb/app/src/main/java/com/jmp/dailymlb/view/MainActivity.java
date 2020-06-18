@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                     PlayerRankFragment playerRankFragment = new PlayerRankFragment();
                     transaction1.replace(R.id.fragment_layout, playerRankFragment).commit();
                     return true;
+                } else if (menuItem.getItemId() == R.id.daily_game) {
+                    FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                    GamesByDateFragment gamesByDateFragment = new GamesByDateFragment();
+                    transaction1.replace(R.id.fragment_layout, gamesByDateFragment).commit();
+                    return true;
                 }
                 return false;
             }

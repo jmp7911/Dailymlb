@@ -39,17 +39,12 @@ public class PlayerRankAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final PlayerRankViewHolder holder;
         String item = getItem(position);
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_player_rank, null);
-            holder = new PlayerRankViewHolder();
-            holder.textView = convertView.findViewById(R.id.player_rank_text);
-            convertView.setTag(holder);
-        } else {
-            holder = (PlayerRankViewHolder)convertView.getTag();
         }
-        holder.textView.setText(item);
+        TextView textView = convertView.findViewById(R.id.player_rank_text);
+        textView.setText(item);
         return convertView;
     }
 

@@ -1,64 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:id="@+id/player_rank_batter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/player_rank_pitcher"
-        />
-    <Button
-        android:id="@+id/player_rank_pitcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/player_rank_batter"
-        app:layout_constraintRight_toRightOf="parent"/>
-    <TableLayout
-        android:id="@+id/player_rank_average"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_rank_batter">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    </TableLayout>
-    <TableLayout
-        android:id="@+id/player_rank_home_run_or_winning"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/player_rank_average"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_rank_pitcher">
+        android:layout_height="wrap_content">
 
-    </TableLayout>
-    <TableLayout
-        android:id="@+id/player_rank_run_batted_in_or_pitcher_strike_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_rank_average">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </TableLayout>
-    <TableLayout
-        android:id="@+id/player_rank_stolen_base_or_saving"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/player_rank_run_batted_in_or_pitcher_strike_out"
-        app:layout_constraintTop_toBottomOf="@id/player_rank_home_run_or_winning">
 
-    </TableLayout>
-    <TableLayout
-        android:id="@+id/player_rank_ops_or_whip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/player_rank_run_batted_in_or_pitcher_strike_out">
+            <Button
+                android:id="@+id/player_rank_american_league_batter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AL타자"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintRight_toLeftOf="@+id/player_rank_american_league_pitcher"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </TableLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/player_rank_american_league_pitcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AL투수"
+                app:layout_constraintLeft_toRightOf="@+id/player_rank_american_league_batter"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/player_rank_national_league_batter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NL타자"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintRight_toLeftOf="@+id/player_rank_national_league_pitcher"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/player_rank_national_league_pitcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NL투수"
+                app:layout_constraintLeft_toRightOf="@+id/player_rank_national_league_batter"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/player_rank_average_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_american_league_batter" />
+
+            <GridView
+                android:id="@+id/player_rank_average"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:numColumns="4"
+                android:verticalSpacing="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player_rank_average_text">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/player_rank_home_run_or_winning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_average" />
+
+            <GridView
+                android:id="@+id/player_rank_home_run_or_winning"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:numColumns="4"
+                android:verticalSpacing="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/player_rank_home_run_or_winning_text">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/player_rank_run_batted_in_or_pitcher_strike_out_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_home_run_or_winning" />
+
+            <GridView
+                android:id="@+id/player_rank_run_batted_in_or_pitcher_strike_out"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:numColumns="4"
+                android:verticalSpacing="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_run_batted_in_or_pitcher_strike_out_text">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/player_rank_stolen_base_or_saving_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_run_batted_in_or_pitcher_strike_out" />
+
+            <GridView
+                android:id="@+id/player_rank_stolen_base_or_saving"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:numColumns="4"
+                android:verticalSpacing="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_stolen_base_or_saving_text">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/player_rank_ops_or_whip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_stolen_base_or_saving" />
+
+            <GridView
+                android:id="@+id/player_rank_ops_or_whip"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:numColumns="4"
+                android:verticalSpacing="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/player_rank_ops_or_whip_text">
+
+            </GridView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
