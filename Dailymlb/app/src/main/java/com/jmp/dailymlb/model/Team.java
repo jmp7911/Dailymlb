@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Team {
     @SerializedName("TeamID")
     int teamId;
-    @SerializedName("Team")
+    @SerializedName("Key")
     String team;
     @SerializedName("Active")
     boolean isActive;
