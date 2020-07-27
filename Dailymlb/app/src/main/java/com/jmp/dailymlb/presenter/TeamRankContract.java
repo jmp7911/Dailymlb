@@ -3,6 +3,7 @@ package com.jmp.dailymlb.presenter;
 import com.jmp.dailymlb.model.Team;
 import com.jmp.dailymlb.model.TeamStat;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TeamRankContract {
@@ -14,7 +15,7 @@ public interface TeamRankContract {
     interface Presenter {
         void attachView(TeamRankContract.View view);
         void detachView();
-        void getTeamStats(int season);
+        void getTeamStats(Date today);
         void getTeams();
     }
 }

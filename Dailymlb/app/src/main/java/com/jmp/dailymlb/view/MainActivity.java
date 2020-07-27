@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         GamesByDateFragment dateFragment = new GamesByDateFragment();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_layout, dateFragment).commit();
+        final TeamRankFragment teamRankFragment = new TeamRankFragment();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.team_rank) {
-                    TeamRankFragment teamRankFragment = new TeamRankFragment();
                     FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                     transaction1.replace(R.id.fragment_layout, teamRankFragment).commit();
                     return true;

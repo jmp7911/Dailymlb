@@ -18,6 +18,7 @@ import com.jmp.dailymlb.presenter.TeamRankPresenter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -75,7 +76,7 @@ public class TeamRankFragment extends Fragment implements TeamRankContract.View 
         teamRankPresenter = new TeamRankPresenter();
         teamRankPresenter.attachView(this);
         teamRankPresenter.getTeams();
-        teamRankPresenter.getTeamStats(2019);
+        teamRankPresenter.getTeamStats(new Date());
         btnALTeamRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,14 +112,15 @@ public class TeamRankFragment extends Fragment implements TeamRankContract.View 
     }
 
     private void showTeamRank(int league) {
-        setTeamRankAdapter(westDivision, getSortedTeamStats(league, R.string.west_division), league, R.string.west_division);
-        setTeamRankAdapter(centralDivision, getSortedTeamStats(league, R.string.central_division), league, R.string.central_division);
-        setTeamRankAdapter(eastDivision, getSortedTeamStats(league, R.string.east_division), league, R.string.east_division);
-        setTeamRankAdapter(wildCard, getSortedTeamStats(league, R.string.wild_card), league, R.string.wild_card);
+        setTeamRankAdapter(westDivision, league, R.string.west_division);
+        setTeamRankAdapter(centralDivision, league, R.string.central_division);
+        setTeamRankAdapter(eastDivision, league, R.string.east_division);
+        setTeamRankAdapter(wildCard, league, R.string.wild_card);
     }
 
-    private void setTeamRankAdapter(GridView container, List<TeamStat> sortedTeamStats, int league, int division) {
+    private void setTeamRankAdapter(GridView container, int league, int division) {
         List<String> teamRanks = new ArrayList<>();
+        List<TeamStat> sortedTeamStats = getSortedTeamStats(league, division);
         int[] rank = getRank(sortedTeamStats);
         float[] difference = getDifferenceOfGames(sortedTeamStats);
         for(int i = 0; i < sortedTeamStats.size(); i++) {

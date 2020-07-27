@@ -3,6 +3,7 @@ package com.jmp.dailymlb.presenter;
 import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Stadium;
 
+import java.util.Date;
 import java.util.List;
 
 public interface GamesContract {
@@ -14,7 +15,7 @@ public interface GamesContract {
     interface Presenter {
         void attachView(View view);
         void detachView();
-        void getGamesByDate(int year, int month, int day);
+        void getGamesByDate(Date today);
         void getStadiums();
     }
 }

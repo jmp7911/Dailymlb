@@ -4,6 +4,8 @@ import com.jmp.dailymlb.model.Retrofit2Client;
 import com.jmp.dailymlb.model.Team;
 import com.jmp.dailymlb.model.TeamStat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +32,9 @@ public class TeamRankPresenter implements TeamRankContract.Presenter {
     }
 
     @Override
-    public void getTeamStats(int season) {
+    public void getTeamStats(Date today) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+        int season = Integer.parseInt(simpleDateFormat.format(today));
         Call<List<TeamStat>> request = Retrofit2Client.getInstance().getApiService()
                 .getTeamStats(season, API_KEY);
         request.enqueue(new Callback<List<TeamStat>>() {
