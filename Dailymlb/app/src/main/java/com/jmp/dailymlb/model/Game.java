@@ -42,7 +42,7 @@ public class Game {
     int awayTeamRuns;
     @SerializedName("HomeTeamRuns")
     int homeTeamRuns;
-    @SerializedName("AwayTeamErros")
+    @SerializedName("AwayTeamErrors")
     int awayTeamErrors;
     @SerializedName("HomeTeamErrors")
     int homeTeamErrors;

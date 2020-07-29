@@ -47,6 +47,7 @@ public class GamesPresenter implements GamesContract.Presenter {
                         break;
                     case 400 :
                         view.showToast("Error : Client error");
+                        break;
                     case 404 :
                         view.showToast("Error : Not Found");
                         break;
