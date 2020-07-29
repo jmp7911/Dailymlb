@@ -23,6 +23,8 @@ public class PlayerStat {
     String positionCategory;
     @SerializedName("Games")
     int games;
+    @SerializedName("AtBats")
+    float atBats;
     @SerializedName("Hits")
     float hits;
     @SerializedName("Runs")
@@ -31,6 +33,12 @@ public class PlayerStat {
     float homeRuns;
     @SerializedName("BattingAverage")
     float avg;
+    @SerializedName("OnBasePlusSlugging")
+    float ops;
+    @SerializedName("OnBasePercentage")
+    float obp;
+    @SerializedName("SluggingPercentage")
+    float slg;
     @SerializedName("StolenBases")
     float stolenBases;
     @SerializedName("RunsBattedIn")
@@ -39,6 +47,8 @@ public class PlayerStat {
     float walks;
     @SerializedName("HitByPitch")
     float hitByPitch;
+    @SerializedName("InningsPitchedDecimal")
+    float inningsPitched;
     @SerializedName("Strikeouts")
     float strikeouts;
     @SerializedName("Wins")
@@ -57,6 +67,14 @@ public class PlayerStat {
     float pitchingHomeRuns;
     @SerializedName("WalksHitsPerInningsPitched")
     float whip;
+
+    public float getInningsPitched() {
+        return inningsPitched;
+    }
+
+    public float getAtBats() {
+        return atBats;
+    }
 
     public int getStatId() {
         return statId;
@@ -112,6 +130,18 @@ public class PlayerStat {
 
     public float getAvg() {
         return avg;
+    }
+
+    public float getOps() {
+        return ops;
+    }
+
+    public float getObp() {
+        return obp;
+    }
+
+    public float getSlg() {
+        return slg;
     }
 
     public float getStolenBases() {
