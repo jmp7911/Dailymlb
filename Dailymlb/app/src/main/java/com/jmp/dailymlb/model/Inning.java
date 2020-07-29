@@ -34,4 +34,24 @@ public class Inning {
         return homeTeamRuns;
     }
 
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public void setInningId(int inningId) {
+        this.inningId = inningId;
+    }
+
+    public void setInningNumber(int inningNumber) {
+        this.inningNumber = inningNumber;
+    }
+
+    public void setAwayTeamRuns(int awayTeamRuns) {
+        this.awayTeamRuns = awayTeamRuns;
+    }
+
+    public void setHomeTeamRuns(int homeTeamRuns) {
+        this.homeTeamRuns = homeTeamRuns;
+    }
 }
+

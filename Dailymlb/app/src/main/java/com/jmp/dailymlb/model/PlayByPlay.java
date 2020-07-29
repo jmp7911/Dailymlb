@@ -14,15 +14,8 @@ public class PlayByPlay {
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
     public ArrayList<Play> getPlays() {
         return plays;
     }
 
-    public void setPlays(ArrayList<Play> plays) {
-        this.plays = plays;
-    }
 }

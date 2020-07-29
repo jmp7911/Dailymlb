@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.presenter.MainContract;
 import com.jmp.dailymlb.presenter.MainPresenter;
+
+import static com.jmp.dailymlb.model.Constants.GAME_ID;
 
 
 public class MainActivity extends AppCompatActivity implements MainContract.View{
@@ -25,7 +29,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         BottomNavigationView navigationView = findViewById(R.id.navi_view);
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        GamesByDateFragment dateFragment = new GamesByDateFragment();
+        GamesByDateFragment dateFragment = new GamesByDateFragment(new OnClickResultListener() {
+            @Override
+            public void onClickResult(int gameId) {
+                Intent intent = new Intent(getApplicationContext(), GameReviewActivity.class);
+                intent.putExtra(GAME_ID, gameId);
+                startActivity(intent);
+            }
+        });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_layout, dateFragment).commit();
         final TeamRankFragment teamRankFragment = new TeamRankFragment();
@@ -35,6 +46,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 if (menuItem.getItemId() == R.id.team_rank) {
                     FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                     transaction1.replace(R.id.fragment_layout, teamRankFragment).commit();
+                    return true;
+                } else if (menuItem.getItemId() == R.id.player_rank) {
+                    FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                    PlayerRankFragment playerRankFragment = new PlayerRankFragment();
+                    transaction1.replace(R.id.fragment_layout, playerRankFragment).commit();
+                    return true;
+                } else if (menuItem.getItemId() == R.id.daily_game) {
+                    FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                    GamesByDateFragment gamesByDateFragment = new GamesByDateFragment();
+                    transaction1.replace(R.id.fragment_layout, gamesByDateFragment).commit();
                     return true;
                 }
                 return false;
@@ -46,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -56,4 +78,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showToast(String title) {
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
+
+
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
+import com.jmp.dailymlb.iface.OnClickResultListener;
 import com.jmp.dailymlb.model.Game;
 import com.jmp.dailymlb.model.Stadium;
 import com.jmp.dailymlb.presenter.GamesContract;
@@ -28,7 +29,10 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
     Context context;
     private GamesPresenter gamesPresenter;
     private GamesAdapter gamesAdapter;
-
+    private OnClickResultListener clickResultListener;
+    public GamesByDateFragment(OnClickResultListener clickResultListener) {
+        this.clickResultListener = clickResultListener;
+    }
 
     @Override
     public void onAttach(Context cxt) {
@@ -51,7 +55,12 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        gamesAdapter = new GamesAdapter();
+        gamesAdapter = new GamesAdapter(new OnClickResultListener() {
+            @Override
+            public void onClickResult(int gameId) {
+                clickResultListener.onClickResult(gameId);
+            }
+        });
         recyclerView.setAdapter(gamesAdapter);
         return view;
 
