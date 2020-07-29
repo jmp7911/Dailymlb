@@ -39,10 +39,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_layout, dateFragment).commit();
+        final TeamRankFragment teamRankFragment = new TeamRankFragment();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.player_rank) {
+                if (menuItem.getItemId() == R.id.team_rank) {
+                    FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                    transaction1.replace(R.id.fragment_layout, teamRankFragment).commit();
+                    return true;
+                } else if (menuItem.getItemId() == R.id.player_rank) {
                     FragmentTransaction transaction1 = fragmentManager.beginTransaction();
                     PlayerRankFragment playerRankFragment = new PlayerRankFragment();
                     transaction1.replace(R.id.fragment_layout, playerRankFragment).commit();

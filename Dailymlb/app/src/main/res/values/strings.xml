@@ -3,6 +3,12 @@
     <string name="games_by_date">오늘의경기</string>
     <string name="player_stats">개인 순위</string>
     <string name="team_stats">팀 순위</string>
+    <string name="american_league">AL</string>
+    <string name="national_league">NL</string>
+    <string name="west_division">West</string>
+    <string name="central_division">Central</string>
+    <string name="east_division">East</string>
+    <string name="wild_card">WildCard</string>
     <string name="batting_average">타율</string>
     <string name="home_run">홈런</string>
     <string name="hit">안타</string>

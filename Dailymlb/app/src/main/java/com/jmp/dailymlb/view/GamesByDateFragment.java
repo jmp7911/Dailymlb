@@ -14,6 +14,7 @@ import com.jmp.dailymlb.model.Stadium;
 import com.jmp.dailymlb.presenter.GamesContract;
 import com.jmp.dailymlb.presenter.GamesPresenter;
 
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -70,8 +71,10 @@ public class GamesByDateFragment extends Fragment implements GamesContract.View 
         super.onActivityCreated(savedInstanceState);
         gamesPresenter = new GamesPresenter();
         gamesPresenter.attachView(this);
-        gamesPresenter.getStadiums();
-        gamesPresenter.getGamesByDate(2019, 7, 31);
+        if (!gamesAdapter.getStadiums().isEmpty()) {
+            gamesPresenter.getStadiums();
+        }
+        gamesPresenter.getGamesByDate(new Date());
     }
 
     @Override

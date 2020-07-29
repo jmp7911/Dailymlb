@@ -6,6 +6,7 @@ import com.jmp.dailymlb.model.Stadium;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,14 +31,10 @@ public class GamesPresenter implements GamesContract.Presenter {
 
 
     @Override
-    public void getGamesByDate(int year, int month, int day) {
+    public void getGamesByDate(Date today) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
         Call<List<Game>> request = Retrofit2Client.getInstance().getApiService()
-                .getGamesByDate(simpleDateFormat.format(calendar.getTime()), API_KEY);
+                .getGamesByDate(simpleDateFormat.format(today), API_KEY);
         request.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
