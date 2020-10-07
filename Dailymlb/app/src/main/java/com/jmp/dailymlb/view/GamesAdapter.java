@@ -75,6 +75,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_games, parent, false);
+        view.setBackgroundResource(R.drawable.border);
         return new ViewHolder(view);
     }
 
@@ -109,7 +110,10 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     }
 
     private String formatDateTime(String dateTime) {
-        return dateTime.substring(11, 16);
+
+        int hour = Integer.parseInt(dateTime.substring(11,13)) - 11;
+        String time = dateTime.substring(13,16);
+        return hour + time;
     }
 
     @Override

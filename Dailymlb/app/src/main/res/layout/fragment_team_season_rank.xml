@@ -7,7 +7,7 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
+        android:background="@drawable/blank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -33,93 +33,114 @@
 
         <TextView
             android:id="@+id/team_rank_west_division_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="서부"
             android:textSize="20sp"
+            android:background="#5CD1E5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_american_league_button" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_american_league_button"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_west_division_container"/>
 
         <GridView
             android:id="@+id/team_rank_west_division_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:numColumns="7"
-            android:verticalSpacing="15dp"
+            android:verticalSpacing="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_west_division_text">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_west_division_text"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_central_division_text">
 
         </GridView>
 
         <TextView
             android:id="@+id/team_rank_central_division_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="중부"
             android:textSize="20sp"
+            android:background="#5CD1E5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_west_division_container" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_west_division_container"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_central_division_container"/>
 
         <GridView
             android:id="@+id/team_rank_central_division_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:numColumns="7"
-            android:verticalSpacing="15dp"
+            android:verticalSpacing="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_central_division_text">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_central_division_text"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_east_division_text">
 
         </GridView>
 
         <TextView
             android:id="@+id/team_rank_east_division_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="동부"
             android:textSize="20sp"
+            android:background="#5CD1E5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_central_division_container" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_central_division_container"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_east_division_container"/>
 
         <GridView
             android:id="@+id/team_rank_east_division_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:numColumns="7"
-            android:verticalSpacing="15dp"
+            android:verticalSpacing="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_east_division_text">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_east_division_text"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_wild_card_text">
 
         </GridView>
 
         <TextView
             android:id="@+id/team_rank_wild_card_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="와일드카드"
+            android:background="#5CD1E5"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_east_division_container" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_east_division_container"
+            app:layout_constraintBottom_toTopOf="@id/team_rank_wild_card_container"/>
 
         <GridView
             android:id="@+id/team_rank_wild_card_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:numColumns="7"
-            android:verticalSpacing="15dp"
+            android:verticalSpacing="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/team_rank_wild_card_text">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_rank_wild_card_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp">
 
         </GridView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,19 +23,30 @@ public class PlayerRankPresenter implements PlayerRankContract.Presenter {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         int season = Integer.parseInt(simpleDateFormat.format(today));
         Call<List<PlayerStat>> request = Retrofit2Client.getInstance().getApiService()
-                .getPlayerStats(2019, API_KEY);
+                .getPlayerStats(season, API_KEY);
         request.enqueue(new Callback<List<PlayerStat>>() {
             @Override
             public void onResponse(Call<List<PlayerStat>> call, Response<List<PlayerStat>> response) {
-                if (response.code() == 200) {
-                    view.setPlayerStats(response.body());
+                switch (response.code()) {
+                    case 200:
+                        view.setPlayerStats(response.body());
+                        break;
+                    case 400:
+                        view.showToast("Error : Client Error");
+                        break;
+                    case 404:
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500:
+                        view.showToast("Error : Internal Server Error");
                 }
-
+                view.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<PlayerStat>> call, Throwable t) {
                 view.showToast(t.getMessage());
+                view.dismiss();
             }
         });
     }
@@ -45,12 +56,22 @@ public class PlayerRankPresenter implements PlayerRankContract.Presenter {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         int season = Integer.parseInt(simpleDateFormat.format(today));
         Call<List<TeamStat>> request = Retrofit2Client.getInstance().getApiService()
-                .getTeamStats(2019, API_KEY);
+                .getTeamStats(season, API_KEY);
         request.enqueue(new Callback<List<TeamStat>>() {
             @Override
             public void onResponse(Call<List<TeamStat>> call, Response<List<TeamStat>> response) {
-                if (response.code() == 200) {
-                    view.setTeamStats(response.body());
+                switch (response.code()) {
+                    case 200:
+                        view.setTeamStats(response.body());
+                        break;
+                    case 400:
+                        view.showToast("Error : Client Error");
+                        break;
+                    case 404:
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500:
+                        view.showToast("Error : Internal Server Error");
                 }
             }
 
@@ -68,8 +89,18 @@ public class PlayerRankPresenter implements PlayerRankContract.Presenter {
         request.enqueue(new Callback<List<Team>>() {
             @Override
             public void onResponse(Call<List<Team>> call, Response<List<Team>> response) {
-                if (response.code() == 200) {
-                    view.setTeams(response.body());
+                switch (response.code()) {
+                    case 200:
+                        view.setTeams(response.body());
+                        break;
+                    case 400:
+                        view.showToast("Error : Client Error");
+                        break;
+                    case 404:
+                        view.showToast("Error : Not Found");
+                        break;
+                    case 500:
+                        view.showToast("Error : Internal Server Error");
                 }
             }
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.jmp.dailymlb.R;
 import com.jmp.dailymlb.model.Game;
+import com.jmp.dailymlb.model.GameStatus;
 import com.jmp.dailymlb.model.Inning;
 import com.jmp.dailymlb.model.Play;
 import com.jmp.dailymlb.model.PlayByPlay;
@@ -38,7 +39,7 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
     TextView awayScore;
     TextView homeScore;
     ImageView homeIcon;
-    TextView gameStatus;
+    TextView textGameStatus;
     TextView winningPitcherText;
     TextView winningPitcherLabel;
     TextView savingPitcherText;
@@ -54,7 +55,7 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
         awayScore = findViewById(R.id.review_text_away_score);
         homeIcon = findViewById(R.id.review_home_icon);
         homeScore = findViewById(R.id.review_text_home_score);
-        gameStatus = findViewById(R.id.review_text_status);
+        textGameStatus = findViewById(R.id.review_text_status);
         winningPitcherText = findViewById(R.id.text_winning_pitcher);
         winningPitcherLabel = findViewById(R.id.text_winning_pitcher_label);
         savingPitcherText = findViewById(R.id.text_saving_pitcher);
@@ -81,7 +82,11 @@ public class GameReviewActivity extends AppCompatActivity implements GameReviewC
         Game game = playByPlay.getGame();
         awayScore.setText(String.valueOf(game.getAwayTeamRuns()));
         homeScore.setText(String.valueOf(game.getHomeTeamRuns()));
-        gameStatus.setText(game.getStatus());
+        for(GameStatus gameStatus : GameStatus.values()) {
+            if (String.valueOf(gameStatus).equals(game.getStatus())) {
+                textGameStatus.setText(gameStatus.getStatus());
+            }
+        }
         for(Teams team : Teams.values()) {
             if (String.valueOf(team).equals(game.getAwayTeam())) {
                 awayIcon.setImageResource(team.getDrawableId());

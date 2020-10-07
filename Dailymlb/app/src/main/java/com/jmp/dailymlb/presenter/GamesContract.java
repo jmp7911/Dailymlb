@@ -16,6 +16,7 @@ public interface GamesContract {
         void attachView(View view);
         void detachView();
         void getGamesByDate(Date today);
+        void getGamesByDate(int year, int month, int day);
         void getStadiums();
     }
 }

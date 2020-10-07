@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         BottomNavigationView navigationView = findViewById(R.id.navi_view);
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        GamesByDateFragment dateFragment = new GamesByDateFragment(new OnClickResultListener() {
+        final GamesByDateFragment dateFragment = new GamesByDateFragment(new OnClickResultListener() {
             @Override
             public void onClickResult(int gameId) {
                 Intent intent = new Intent(getApplicationContext(), GameReviewActivity.class);
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_layout, dateFragment).commit();
         final TeamRankFragment teamRankFragment = new TeamRankFragment();
+        final PlayerRankFragment playerRankFragment = new PlayerRankFragment();
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -49,13 +50,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                     return true;
                 } else if (menuItem.getItemId() == R.id.player_rank) {
                     FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-                    PlayerRankFragment playerRankFragment = new PlayerRankFragment();
                     transaction1.replace(R.id.fragment_layout, playerRankFragment).commit();
                     return true;
                 } else if (menuItem.getItemId() == R.id.daily_game) {
                     FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-                    GamesByDateFragment gamesByDateFragment = new GamesByDateFragment();
-                    transaction1.replace(R.id.fragment_layout, gamesByDateFragment).commit();
+                    transaction1.replace(R.id.fragment_layout, dateFragment).commit();
                     return true;
                 }
                 return false;

@@ -14,6 +14,7 @@ public interface PlayerRankContract {
         void setPlayerStats(List<PlayerStat> playerStats);
         void setTeamStats(List<TeamStat> teamStats);
         void setTeams(List<Team> teams);
+        void dismiss();
     }
     interface Presenter {
         void attachView(PlayerRankContract.View view);

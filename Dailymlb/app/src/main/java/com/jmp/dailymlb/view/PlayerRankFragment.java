@@ -1,12 +1,15 @@
 package com.jmp.dailymlb.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +27,9 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 public class PlayerRankFragment extends Fragment implements PlayerRankContract.View {
     View view;
@@ -46,6 +51,7 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
     TextView runBattedInOrPitcherStrikeOutText;
     TextView stolenBaseOrSavingText;
     TextView opsOrWhipText;
+    ProgressDialog progressDialog;
     public PlayerRankFragment() {
         view = null;
         playerRankPresenter = null;
@@ -64,6 +70,7 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         runBattedInOrPitcherStrikeOutText = null;
         stolenBaseOrSavingText = null;
         opsOrWhipText = null;
+        progressDialog = null;
     }
 
     @Override
@@ -97,6 +104,7 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         runBattedInOrPitcherStrikeOutText = view.findViewById(R.id.player_rank_run_batted_in_or_pitcher_strike_out_text);
         stolenBaseOrSavingText = view.findViewById(R.id.player_rank_stolen_base_or_saving_text);
         opsOrWhipText = view.findViewById(R.id.player_rank_ops_or_whip_text);
+        progressDialog = new ProgressDialog(getContext());
         playerRankPresenter = new PlayerRankPresenter();
         playerRankPresenter.attachView(this);
         return view;
@@ -105,6 +113,9 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        progressDialog.setProgressStyle(R.style.Theme_Design_NoActionBar);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         playerRankPresenter.getPlayerStats(new Date());
         playerRankPresenter.getTeamStats(new Date());
         playerRankPresenter.getTeams();
@@ -142,10 +153,6 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
     @Override
     public void setPlayerStats(List<PlayerStat> playerStats) {
         this.playerStats = playerStats;
-        if (!playerStats.isEmpty()) {
-            showBatterRank(R.string.american_league);
-        }
-
     }
 
     @Override
@@ -158,7 +165,19 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         this.teams = teams;
     }
 
+    @Override
+    public void dismiss() {
+        progressDialog.dismiss();
+    }
+
     private void showBatterRank(int league) {
+        if (playerStats == null) {
+            Toast.makeText(getContext(), "정보를 불러오고 있습니다. 조금만 기다려주세요", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (playerStats.size() == 0) {
+            Toast.makeText(getContext(), "정보를 불러오고 있습니다. 조금만 기다려주세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
         averageText.setText(R.string.batting_average);
         homeRunOrWinningText.setText(R.string.home_run);
         runBattedInOrPitcherStrikeOutText.setText(R.string.runs_batted_in);
@@ -218,7 +237,6 @@ public class PlayerRankFragment extends Fragment implements PlayerRankContract.V
         PlayerRankAdapter playerRankAdapter = new PlayerRankAdapter(getContext());
         playerRankAdapter.setPlayerStats(playerRanks);
         container.setAdapter(playerRankAdapter);
-
     }
     private int[] getRank(List<PlayerStat> sortedPlayerStats, int resId) {
 

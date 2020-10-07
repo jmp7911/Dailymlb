@@ -43,6 +43,7 @@ public class PlayerRankAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_player_rank, null);
         }
+        convertView.setBackgroundResource(R.drawable.border);
         TextView textView = convertView.findViewById(R.id.player_rank_text);
         textView.setText(item);
         return convertView;
