@@ -154,8 +154,16 @@ app
  ┣ build.gradle
  ┗ proguard-rules.pro
 ```
+
 ### 기능명세
 
 
 ### 화면설계
+
+|Home & 경기상세기록|팀 순위|개인 순위|
+|---|---|---|
+|![list-detail](https://github.com/jmp7911/Dailymlb/assets/37658328/b578d913-c2aa-4703-bc84-607390e3d765)|![standings](https://github.com/jmp7911/Dailymlb/assets/37658328/62f64b0f-fe76-4fd5-914f-b687e15f1fef)|![personal-rank](https://github.com/jmp7911/Dailymlb/assets/37658328/c3e48b8e-8239-47d3-8f8f-2beb58c9196b)|
+
+
+
 
