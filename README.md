@@ -168,7 +168,7 @@ app
 
 ### 회고
 - MVP Pattern
-  - ![다운로드](https://github.com/jmp7911/Dailymlb/assets/37658328/428cb3a5-1399-41ec-8afe-6868e80b52d9) 
+  ![다운로드](https://github.com/jmp7911/Dailymlb/assets/37658328/428cb3a5-1399-41ec-8afe-6868e80b52d9) 
   - Model, View 는 의존성이 없어 유지보수에 장점이 있습니다. View는 Model을 가지지 않으며 Presenter를 통해서 데이터가 전달 됩니다.
   - 다만 View, Presenter 의 의존성은 어플리케이션이 복잡해 질 수록 의존성이 강해집니다.
 
