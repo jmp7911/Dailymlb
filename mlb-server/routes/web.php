@@ -3,6 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use Illuminate\Http\Request;
+ 
+Route::get('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken('api');
+ 
+    return ['token' => $token->plainTextToken];
+});
 
 Route::get('/', function () {
     return view('welcome');
