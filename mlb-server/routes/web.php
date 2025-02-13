@@ -9,7 +9,7 @@ Route::get('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken('api');
  
     return ['token' => $token->plainTextToken];
-});
+})->middleware('auth:sanctum');
 
 Route::get('/', function () {
     return view('welcome');
