@@ -19,19 +19,104 @@ class SportsDataController extends Controller
     }
     
     public function getStadiums() {
-        try {
-            $response = $this->client->get('/v3/mlb/scores/json/Stadiums', [
-                'query' => [
-                    'key' => '4bebbc0605674b6c95b071224bca6339'
-                ]
-            ]);
-        } catch (\Exception $e) {
-            // dd($e->getMessage());
-        }
+        $response = $this->client->get('/v3/mlb/scores/json/Stadiums', [
+            'query' => [
+                'key' => env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        
         if ($response->getStatusCode() == 200) {
-            $stadiums = $response->getBody()->getContents();
+            $JsonBody = $response->getBody()->getContents();
         }
         
-        return $stadiums;
+        return $JsonBody;
+    }
+
+    public function getGamesByDate($date) {
+        $response = $this->client->get("/v3/mlb/scores/json/GamesByDate/{$date}", [
+            'query' => [
+                'key' => env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        
+        return $JsonBody;
+    }
+
+    public function getPlayerStats($season) {
+        $response = $this->client->get("/v3/mlb/stats/json/PlayerSeasonStatsByTeam/{$season}", [
+            'query' => [
+                'key' => env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
+    }
+
+    public function getTeamStats($season) {
+        $response = $this->client->get("/v3/mlb/stats/json/TeamSeasonStats/{$season}", [
+            'query' => [
+                'key' => env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
+    }
+
+    public function getTeams() {
+        $response = $this->client->get('v3/mlb/scores/json/teams', [
+            'query'=> [
+                'key'=> env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
+
+    }
+
+    public function getPlayByPlay($gameId) {
+        $response = $this->client->get("/v3/mlb/pbp/json/PlayByPlay/{$gameId}", [
+            "query"=> [
+                "key"=> env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
+
+    }
+
+    public function getPlayerGameStat($date, $playerId) {
+        $response = $this->client->get("/v3/mlb/stats/json/PlayerGameStatsByPlayer/{$date}/{$playerId}", [
+            "query"=> [
+                "key"=> env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
+    }
+
+    public function getStandings($season) {
+        $response = $this->client->get("/v3/mlb/scores/json/Standings/{$season}", [
+            "query"=> [
+                "key"=> env('SPORTS_DATA_API_KEY')
+            ]
+        ]);
+        if ($response->getStatusCode() == 200) {
+            $JsonBody = $response->getBody()->getContents();
+        }
+        return $JsonBody;
     }
 }
