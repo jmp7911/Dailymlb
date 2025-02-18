@@ -12,7 +12,7 @@ Route::get('/tokens/create', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(['message' => 'Hello, Laravel 11 API!']);
 });
 
 Route::get('/dashboard', function () {
