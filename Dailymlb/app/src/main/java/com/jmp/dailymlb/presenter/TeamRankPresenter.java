@@ -48,13 +48,13 @@ public class TeamRankPresenter implements TeamRankContract.Presenter {
                         view.setTeamStats(response.body());
                         break;
                     case 400:
-                        view.showToast("Error : Client Error");
+                        view.showToast("getTeamStats : Client Error");
                         break;
                     case 404:
-                        view.showToast("Error : Not Found");
+                        view.showToast("getTeamStats : Not Found");
                         break;
                     case 500:
-                        view.showToast("Error : Internal Server Error");
+                        view.showToast("getTeamStats : Internal Server Error");
                 }
             }
 
@@ -79,13 +79,13 @@ public class TeamRankPresenter implements TeamRankContract.Presenter {
                         view.setStandings(response.body());
                         break;
                     case 400:
-                        view.showToast("Error : Client Error");
+                        view.showToast("getStandings : Client Error");
                         break;
                     case 404:
-                        view.showToast("Error : Not Found");
+                        view.showToast("getStandings : Not Found");
                         break;
                     case 500:
-                        view.showToast("Error : Internal Server Error");
+                        view.showToast("getStandings : Internal Server Error");
                 }
             }
 
@@ -108,13 +108,13 @@ public class TeamRankPresenter implements TeamRankContract.Presenter {
                         view.setTeams(response.body());
                         break;
                     case 400:
-                        view.showToast("Error : Client Error");
+                        view.showToast("getTeams : Client Error");
                         break;
                     case 404:
-                        view.showToast("Error : Not Found");
+                        view.showToast("getTeams : Not Found");
                         break;
                     case 500:
-                        view.showToast("Error : Internal Server Error");
+                        view.showToast("getTeams : Internal Server Error");
                 }
             }
 
