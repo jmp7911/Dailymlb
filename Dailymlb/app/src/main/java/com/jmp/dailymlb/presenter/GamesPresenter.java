@@ -17,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.facebook.stetho.inspector.network.ResponseHandlingInputStream.TAG;
 import static com.jmp.dailymlb.model.Constants.API_KEY;
 import static com.jmp.dailymlb.model.Constants.ONE_DAY_MILLS;
 
@@ -126,6 +127,7 @@ public class GamesPresenter implements GamesContract.Presenter {
             @Override
             public void onFailure(Call<List<Stadium>> call, Throwable t) {
                 view.showToast(t.getMessage());
+                Log.d(TAG, "onFailure: "+t.getMessage());
             }
         });
     }

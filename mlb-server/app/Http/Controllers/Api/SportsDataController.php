@@ -47,7 +47,7 @@ class SportsDataController extends Controller
     }
 
     public function getPlayerStats($season) {
-        $response = $this->client->get("/v3/mlb/stats/json/PlayerSeasonStatsByTeam/{$season}", [
+        $response = $this->client->get("/v3/mlb/stats/json/PlayerSeasonStatsSplitByTeam/{$season}", [
             'query' => [
                 'key' => env('SPORTS_DATA_API_KEY')
             ]
@@ -59,7 +59,7 @@ class SportsDataController extends Controller
     }
 
     public function getTeamStats($season) {
-        $response = $this->client->get("/v3/mlb/stats/json/TeamSeasonStats/{$season}", [
+        $response = $this->client->get("/v3/mlb/scores/json/TeamSeasonStats/{$season}", [
             'query' => [
                 'key' => env('SPORTS_DATA_API_KEY')
             ]
