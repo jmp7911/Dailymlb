@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('/teams', [SportsDataController::class, 'getTeams']);
   Route::get('/PlayByPlay/{gameId}', [SportsDataController::class, 'getPlayByPlay']);
   Route::get('/PlayerGameStatsByPlayer/{date}/{playerId}', [SportsDataController::class, 'getPlayerGameStat']);
-  Route::get('/Standings', [SportsDataController::class, 'getStandings']);
+  Route::get('/Standings/{season}', [SportsDataController::class, 'getStandings']);
 });
 
 Route::get('/hello', function () {
