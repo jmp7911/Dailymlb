@@ -216,7 +216,7 @@ app
 
 ### 백엔드 서버 API 명세서
 
-BASE_URL = http://dailymlb.codemansa.net/api/
+BASE_URL = http://13.124.59.186/api/
 
 
 | endPoint   | Method | Description                                 |
