@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Android-blue?logo=Android">
   <img src="https://img.shields.io/badge/Java-blue?">
   <img src="https://img.shields.io/badge/Laravel-blue?logo=Laravel">
-  <img src="https://img.shields.io/badge/Github Actions-yellow?logo=Github actions">
+  <img src="https://img.shields.io/badge/Github_Actions-yellow?logo=Github actions">
   <img src="https://img.shields.io/badge/Android_Studio-yellow?logo=Android Studio">
 </div>
 
